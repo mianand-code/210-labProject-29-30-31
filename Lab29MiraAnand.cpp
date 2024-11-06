@@ -25,7 +25,7 @@
     // external input file reading should happen here
     // I can either create a function for this process or I can handle it in main()
     // the input file name should be "inventory.txt"
-    // should check for & report any errors when opening the input file
+    // should check for & report any errors when opening the input file. Program should not proceed unless input file is successfully opened
     // a comment should be included in the code to ensure the user understands that the input file should be structured exactly the way I have it in order for the program to operate successfully
     // for each line of the input file, extract the key (season) and the product name
     // insert the product into its corresponding list (Clothing, Electronics, Groceries) in the array for their season
@@ -75,6 +75,12 @@
     // now that we have outputted that an event has occurred, we have to update the inventory accordingly
     // write code to update the inventory. Inventory will be updated based on any of the 3 event types
     // this function our helper function will be utilized here to ensure that a purchase or theft cannot happen if a department has no products (is out of stock)
+// points to consider when coding this function:
+    // purchases or thefts should not be allowed when a department has no stock (helper function)
+    // products should/can be delivered to departments that have no stock
+    // if a duplicate product is being delivered (to "top off" the inventory), the product's name should show more than once
+    // if a product is stolen or purchased, only 1 product should be removed from the inventory if there is multiple stock of the same product
+    // products delivered to a department should be related/belong to their specific department
 
 // make sure to include function header comments here
 // DESCRIPTION:
