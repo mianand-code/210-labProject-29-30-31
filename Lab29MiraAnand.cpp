@@ -50,7 +50,7 @@ int main()
     // I need to include detailed comments that explain this data structure piece by piece
     // - creation of an std::map named "inventory"
     // - the key is a string variable that represents a season: Spring, Summer, Fall, Winter
-    // - the value is an std::array of 3 std::lists. These std::lists represent different store departments: clothing, electronics, groceries
+    // - the value is an std::array of 3 std::lists. These std::lists represent different store departments: electronics, clothing, groceries
     // - string values of product names will be held within each of these std::lists
     map<string, array<list<string>, 3>> inventory;
 
@@ -67,9 +67,22 @@ int main()
     // when I add code that will read from the input file, this code block will be removed
     // to manually initialize - for each of the 4 seasons, each of the 3 departments will start off with 2 products
     // for product name - I will be using my global const dummy variable to set the universal name for all products
-    inventory[season1][0] = {dummyVariable, dummyVariable};
-    inventory[season1][1] = {dummyVariable, dummyVariable};
-    inventory[season1][2] = {dummyVariable, dummyVariable};
+    // [0] = electronics, [1] = clothing, [2] = groceries
+    inventory[season1][0] = {dummyVariable, dummyVariable}; // Spring, electronics
+    inventory[season1][1] = {dummyVariable, dummyVariable}; // Spring, clothing
+    inventory[season1][2] = {dummyVariable, dummyVariable}; // Spring, groceries
+
+    inventory[season2][0] = {dummyVariable, dummyVariable}; // Summer, electronics
+    inventory[season2][1] = {dummyVariable, dummyVariable}; // Summer, clothing
+    inventory[season2][2] = {dummyVariable, dummyVariable}; // Summer, groceries
+
+    inventory[season3][0] = {dummyVariable, dummyVariable}; // Fall, electronics
+    inventory[season3][1] = {dummyVariable, dummyVariable}; // Fall, clothing
+    inventory[season3][2] = {dummyVariable, dummyVariable}; // Fall, groceries
+
+    inventory[season4][0] = {dummyVariable, dummyVariable}; // Winter, electronics
+    inventory[season4][1] = {dummyVariable, dummyVariable}; // Winter, clothing
+    inventory[season4][2] = {dummyVariable, dummyVariable}; // Winter, groceries
 
     // after manually initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
