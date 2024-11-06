@@ -7,7 +7,7 @@
 // define namespace (using namespace std;) after including the headers
 
 // include any global const variables here
-    // so far, for mockup/wireframe purposes, I am planning on creating a global const dummy variable to hold a product's name
+    // so far, for mockup/wireframe purposes, I am planning on creating a global const dummy variable to use for the name of each product
 
 // define function prototypes here
     // planning on having 3 functions
@@ -20,3 +20,15 @@
 
     // creation of the foundational data structure
     // I need to include detailed comments that explain this data structure piece by piece
+
+    // external input file reading should happen here
+    // I can either create a function for this process or I can handle it in main()
+    // the input file name should be "inventory.txt"
+    // should check for & report any errors when opening the input file
+    // a comment should be included in the code to ensure the user understands that the input file should be structured exactly the way I have it in order for the program to operate successfully
+    // for each line of the input file, extract the key (season) and the product name
+    // insert the product into its corresponding list (Clothing, Electronics, Groceries) in the array for their season
+
+    // for mockup/wireframe purposes, I am initializing the inventory manually
+    // later on, I will add code as explained in the block above to read inventory data from the input file instead
+    // when I add code to read from the input file, this code to initialize the inventory manually will be removed
