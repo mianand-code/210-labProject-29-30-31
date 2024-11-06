@@ -16,6 +16,7 @@
     // 3. a helper function to assist the inventory simulation function (so the inventory simulation function isn't too complex/cluttered)
 
 // int main() function starts here
+
     // srand(time(0)); needed as first line in main() for randomization - so inventory simulation is more realistic
 
     // creation of the foundational data structure
@@ -40,4 +41,15 @@
 
     // create a for loop to perform the inventory simulation over 25 time periods (which represent days)
         // within the for loop, we need to randomly select a # of inventory-related events to occur
-        // based on , we need to randomly select a season, department, and type of inventory-related event to occur 
+        // based on this # of random events (create another for loop), we need to randomly select a season, department, and type of inventory-related event to occur 
+        // call our function that performs the inventory simulation within this second for loop
+        // within the 1st for loop, call our output function that will display the current inventory for the time period after the simulation occurs
+
+    // make sure to add return 0; at the end of main()
+
+// int main() function ends here
+
+// create a function that displays/outputs the current inventory
+    // make sure to include function header comments
+    // the parameter for the function should be the
+    // create a range-based for loop 
