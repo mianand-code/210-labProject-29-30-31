@@ -100,7 +100,8 @@ int main()
 
     // after manually initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
-    cout << "Starting/"
+    cout << "Starting/Initial inventory:" << endl;
+    displayInventory(inventory); // displayInventory() function call, to display the current inventory
 
     // create a for loop to perform the inventory simulation over 25 time periods (which represent days) - meets requirement
         // within the for loop, we need to randomly select a # of inventory-related events to occur
@@ -114,14 +115,19 @@ int main()
 } // int main() function ends here
 
 // make sure to include function header comments here
-// create a function that displays/outputs the contents of our foundational data structure (current inventory) - meets requirement
-// DESCRIPTION:
-// ARGUMENTS: the parameter for the function should be our foundational data structure
-// RETURNS:
+// void displayInventory(const map<string, array<list<string>, 3>>& inventory) function header
+// DESCRIPTION: create a function that displays/outputs the contents of our foundational data structure (current inventory) - meets requirement
+// ARGUMENTS: the parameter for the function should be our foundational data structure - const map<string, array<list<string>, 3>>& inventory
+// RETURNS: nothing, void function
+void displayInventory(const map<string, array<list<string>, 3>>& inventory)
+{
+    cout << "Current inventory:" << endl;
+    
     // create a range-based for loop to access each season (key)
         // create a for loop within this range-based for loop to access each department (according to its index)
         // output the products in each department
         // ensure there is a message that prints if a department has no products (out of stock)
+}
 
 // make sure to include function header comments here
 // create a function that performs the actual inventory simulation - meets requirement
