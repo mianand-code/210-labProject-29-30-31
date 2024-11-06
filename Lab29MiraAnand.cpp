@@ -41,8 +41,8 @@
 
     // create a for loop to perform the inventory simulation over 25 time periods (which represent days)
         // within the for loop, we need to randomly select a # of inventory-related events to occur
-        // based on this # of random events (create another for loop), we need to randomly select a season, department, and type of inventory-related event to occur 
-        // call our function that performs the inventory simulation within this second for loop
+            // based on this # of random events (create another for loop), we need to randomly select a season, department, and type of inventory-related event to occur 
+            // call our function that performs the inventory simulation within this second for loop
         // within the 1st for loop, call our output function that will display the current inventory for the time period after the simulation occurs
 
     // make sure to add return 0; at the end of main()
@@ -51,5 +51,14 @@
 
 // create a function that displays/outputs the current inventory
     // make sure to include function header comments
-    // the parameter for the function should be the
-    // create a range-based for loop 
+    // the parameter for the function should be our foundational data structure
+    // create a range-based for loop to access each season (key)
+        // create a for loop within this range-based for loop to access each department (according to their index)
+        // output the products in each department
+        // ensure there is a message that prints if a department has no products (out of stock)
+
+// create a function that performs the actual inventory simulation
+    // make sure to include function header comments
+    // this function will include various parameters:
+    // 1. our foundational data structure
+    // 2. 
