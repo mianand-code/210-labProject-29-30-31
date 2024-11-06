@@ -109,6 +109,10 @@ int main()
             // call our function that performs the inventory simulation within this second for loop
         // within the 1st for loop, call our output function that will display the current inventory for the current time period after the simulation occurs - meets requirement
 
+    // for mockup/wireframe purposes, I will call the function a few times manually just to check if it's working
+    // randomization/time periods will be set up later in the project
+    inventorySimulation(inventory, season1, "delivery", dummyVariable1C, 1);
+
     // make sure to add return 0; at the end of main()
     return 0;
 
@@ -248,8 +252,13 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
 bool checkUpdateInventoryStock(list<string>& departments, string product)
 {
     // create a for loop that uses an iterator to start at the beginning of the std::list and continue until the end
-    for (auto it = departments.begin(); it != departments.end(); it++)
+    for (auto it = departments.begin(); it != departments.end(); it++) 
     {
-        
+        if (*it == product) // using * with the iterator to de-reference it, to access product name
+        {
+            departments.erase(it); // erase the product at the position of the iterator if the product exists
+            return true;  // true means a product was removed from the department
+        }
     }
+    return false;  // false means no product could be removed from the department since it had no stock and product was not found
 }
