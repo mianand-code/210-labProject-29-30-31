@@ -124,9 +124,35 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
     cout << "Current inventory:" << endl;
     
     // create a range-based for loop to access each season (key)
+    for (auto season : inventory)
+    {
+        cout << "Season: " << season.first << endl; // access the season (key) using .first
+
         // create a for loop within this range-based for loop to access each department (according to its index)
+        for (int d = 0; d < 3; d++)
+        {
+            string name; // to hold the name of a department
+            // associate each department name with an index
+            if (d == 0) 
+            {
+                name = "electronics";
+            }
+            else if (d == 1)
+            {
+                name = "clothing";
+            }
+            else
+            {
+                name = "groceries";
+            }
+
+            cout << name << ": "; // output the name of the department
+
+            if (season.second[d].empty())
+        }
         // output the products in each department
         // ensure there is a message that prints if a department has no products (out of stock)
+    }
 }
 
 // make sure to include function header comments here
