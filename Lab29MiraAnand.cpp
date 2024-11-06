@@ -172,11 +172,6 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
     // 4. the type of inventory-related event
     // 5. the name of the product
 // RETURNS: 
-    // write code (similar to/same as the code in the output function) that associates a department with an index (#)
-    // output the event data - display that an event is happening, along with its associated season, type of event, department, and product name
-    // now that an event has occurred, we have to update the inventory accordingly
-    // write code to update the inventory. Inventory will be updated based on any of the 3 event types
-    // our helper function will be utilized here to ensure that a purchase or theft cannot happen if a department has no products (is out of stock)
 // points to consider when coding this function:
     // purchases or thefts should not be allowed when a department has no stock (helper function)
     // if a product is stolen or purchased, only 1 product should be removed from the inventory if there is multiple stock of the same product (helper function)
@@ -185,7 +180,28 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
     // products delivered to a department should be related/belong to their specific department
 void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string season, string event, string product, int department)
 {
-    cout << "Event! " << season << 
+    // write code (similar to/same as the code in the output function) that associates a department with an index (#)
+    string name; // to hold the name of a department
+    // associate each department name with an index
+    if (department == 0) 
+    {
+        name = "electronics";
+    }
+    else if (department == 1)
+    {
+        name = "clothing";
+    }
+    else
+    {
+        name = "groceries";
+    }
+
+    // output the event data - display that an event is happening, along with its associated season, type of event, department, and product name
+    cout << "Event! " << season << event << ", " << "Department: " << name << " Product: " << product << endl;
+
+    // now that an event has occurred, we have to update the inventory accordingly
+    // write code to update the inventory. Inventory will be updated based on any of the 3 event types
+    // our helper function will be utilized here to ensure that a purchase or theft cannot happen if a department has no products (is out of stock)
 }
 
 // make sure to include function header comments here
@@ -199,3 +215,7 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
 // creating this as a function to ensure that the inventory simulation function isn't too complex
 // this function will help ensure that a theft or purchase only occurs within a department that has products, and is not out of stock
 // if the department + product is in stock, a theft or purchase can happen at any time, and if it happens, the product will be removed from the department's inventory once
+bool checkUpdateInventoryStock(list<string>& departments, string product)
+{
+    
+}
