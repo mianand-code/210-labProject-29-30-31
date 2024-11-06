@@ -24,22 +24,28 @@ using namespace std;
 // include any global const variables here
     // so far, for mockup/wireframe purposes, I am planning on creating a global const dummy variable to use to represent the name of each product
 const string dummyVariable = "product";
+    // adding 4 more global const variables for mockup/wireframe purposes, to represent each of the 4 seasons when manually initializing the inventory for now
+const string season1 = ""
 
 // define function prototypes here
     // planning on having 3 functions
     // 1. to output the contents of the inventory - initially (after input file reading) and then after each time period occurs
     void displayInventory(const map<string, array<list<string>, 3>>& inventory);
     // 2. to perform the actual inventory simulation (when inventory-related events occur)
-    void inventorySimulation(map<string, array<list<string>, 3>>& inventory,)
+    void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string, string, string, int);
     // 3. a helper function to assist the inventory simulation function (so the inventory simulation function isn't too complex/cluttered)
+    bool checkUpdateInventoryStock(list<string>&, string);
 
 // int main() function starts here
-
+int main()
+{
     // srand(time(0)); needed as first line in main() for randomization - so inventory simulation is more realistic
+    srand(time(0));
 
     // creation of the foundational data structure - meets requirement
     // this is the data structure I will be using - map<string, array<list<string>, 3>> inventory;
     // I need to include detailed comments that explain this data structure piece by piece
+    map<string, array<list<string>, 3>> inventory;
 
     // external input file reading should happen here - meets requirement
     // I can either create a function for this process or I can handle it in main()
@@ -54,6 +60,7 @@ const string dummyVariable = "product";
     // when I add code that will read from the input file, this code block will be removed
     // to manually initialize - for each of the 4 seasons, each of the 3 departments will start off with 2 products
     // for product name - I will be using my global const dummy variable to set the universal name for all products
+    inventory
 
     // after manually initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
@@ -65,8 +72,9 @@ const string dummyVariable = "product";
         // within the 1st for loop, call our output function that will display the current inventory for the current time period after the simulation occurs - meets requirement
 
     // make sure to add return 0; at the end of main()
+    return 0;
 
-// int main() function ends here
+} // int main() function ends here
 
 // make sure to include function header comments here
 // create a function that displays/outputs the contents of our foundational data structure (current inventory) - meets requirement
