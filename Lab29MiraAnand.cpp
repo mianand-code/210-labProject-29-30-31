@@ -25,16 +25,19 @@ using namespace std;
     // so far, for mockup/wireframe purposes, I am planning on creating a global const dummy variable to use to represent the name of each product
 const string dummyVariable = "product";
     // adding 4 more global const variables for mockup/wireframe purposes, to represent each of the 4 seasons when manually initializing the inventory for now
-const string season1 = ""
+const string season1 = "Spring";
+const string season2 = "Summer";
+const string season3 = "Fall";
+const string season4 = "Winter";
 
 // define function prototypes here
     // planning on having 3 functions
     // 1. to output the contents of the inventory - initially (after input file reading) and then after each time period occurs
-    void displayInventory(const map<string, array<list<string>, 3>>& inventory);
+void displayInventory(const map<string, array<list<string>, 3>>& inventory);
     // 2. to perform the actual inventory simulation (when inventory-related events occur)
-    void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string, string, string, int);
+void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string, string, string, int);
     // 3. a helper function to assist the inventory simulation function (so the inventory simulation function isn't too complex/cluttered)
-    bool checkUpdateInventoryStock(list<string>&, string);
+bool checkUpdateInventoryStock(list<string>&, string);
 
 // int main() function starts here
 int main()
@@ -45,6 +48,10 @@ int main()
     // creation of the foundational data structure - meets requirement
     // this is the data structure I will be using - map<string, array<list<string>, 3>> inventory;
     // I need to include detailed comments that explain this data structure piece by piece
+    // - creation of an std::map named "inventory"
+    // - the key is a string variable that represents a season: Spring, Summer, Fall, Winter
+    // - the value is an std::array of 3 std::lists. These std::lists represent different store departments: clothing, electronics, groceries
+    // - string values of product names will be held within each of these std::lists
     map<string, array<list<string>, 3>> inventory;
 
     // external input file reading should happen here - meets requirement
@@ -60,7 +67,9 @@ int main()
     // when I add code that will read from the input file, this code block will be removed
     // to manually initialize - for each of the 4 seasons, each of the 3 departments will start off with 2 products
     // for product name - I will be using my global const dummy variable to set the universal name for all products
-    inventory
+    inventory[season1][0] = {dummyVariable, dummyVariable};
+    inventory[season1][1] = {dummyVariable, dummyVariable};
+    inventory[season1][2] = {dummyVariable, dummyVariable};
 
     // after manually initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
