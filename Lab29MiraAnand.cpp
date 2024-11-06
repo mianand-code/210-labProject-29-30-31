@@ -204,15 +204,33 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
         if (event == "delivery") // if a delivery event occurs
         {
             inventory[season][department].push_back(product); // add the product delivered to the end of the list (for that specific season + department)
-            cout <<  "    Updating inventory to relect delivery..." << endl;
+            cout <<  "    Updating inventory to reflect delivery..." << endl;
         }
         else if (event == "purchase" || event == "theft") // if a purchase or theft event occurs (which requires removal of a product from inventory)
         {
             // call our helper function here, checkUpdateInventoryStock()
             // this will check if a department during a season has product in stock before it removes it
+            // if department is in stock, product will be removed once
+            // if department has no stock, user will be notified that theft or purchase could not occur
             if (checkUpdateInventoryStock(inventory[season][department], product))
             {
-
+                // if department has stock
+                // displays message based on event type
+                cout <<  "    Updating inventory to reflect ";
+                if (event == "purchase")
+                    cout << "purchase..." << endl;
+                else
+                    cout << "theft..." << endl;
+            }
+            else
+            {
+                // if department has no stock
+                // displays message based on event type
+                cout <<  "    No stock to ";
+                if (event == "purchase")
+                    cout << "purchase." << endl;
+                else
+                    cout << "steal." << endl;
             }
         }
 }
