@@ -162,8 +162,7 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
 }
 
 // make sure to include function header comments here
-// create a function that performs the actual inventory simulation - meets requirement
-// DESCRIPTION:
+// DESCRIPTION: create a function that performs the actual inventory simulation - meets requirement
 // ARGUMENTS:
     // this function will include various parameters:
     // 1. our foundational data structure
@@ -171,7 +170,7 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
     // 3. the department
     // 4. the type of inventory-related event
     // 5. the name of the product
-// RETURNS: 
+// RETURNS: nothing, void function
 // points to consider when coding this function:
     // purchases or thefts should not be allowed when a department has no stock (helper function)
     // if a product is stolen or purchased, only 1 product should be removed from the inventory if there is multiple stock of the same product (helper function)
@@ -202,20 +201,33 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
     // now that an event has occurred, we have to update the inventory accordingly
     // write code to update the inventory. Inventory will be updated based on any of the 3 event types
     // our helper function will be utilized here to ensure that a purchase or theft cannot happen if a department has no products (is out of stock)
+        if (event == "delivery") // if a delivery event occurs
+        {
+            inventory[season][department].push_back(product); // add the product delivered to the end of the list (for that specific season + department)
+            cout <<  "    Updating inventory to relect delivery..." << endl;
+        }
+        else if (event == "purchase" || event == "theft") // if a purchase or theft event occurs (which requires removal of a product from inventory)
+        {
+            // call our helper function here, checkUpdateInventoryStock()
+            // this will check if a department during a season has product in stock before it removes it
+            if (checkUpdateInventoryStock(inventory[season][department], product))
+            {
+
+            }
+        }
 }
 
 // make sure to include function header comments here
-// create a helper function that works with the inventory simulation function - meets requirement
-// DESCRIPTION:
+// DESCRIPTION: create a helper function that works with the inventory simulation function - meets requirement
 // ARGUMENTS:
     // the parameters for the function should include:
     // 1. the std::list that holds the values that represent the names of each department
     // 2. the product name (in order to be removed from inventory)
-// RETURNS:
+// RETURNS: true or false, since it is a bool function
 // creating this as a function to ensure that the inventory simulation function isn't too complex
 // this function will help ensure that a theft or purchase only occurs within a department that has products, and is not out of stock
 // if the department + product is in stock, a theft or purchase can happen at any time, and if it happens, the product will be removed from the department's inventory once
 bool checkUpdateInventoryStock(list<string>& departments, string product)
 {
-    
+
 }
