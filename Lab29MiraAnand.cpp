@@ -112,6 +112,10 @@ int main()
     // for mockup/wireframe purposes, I will call the function a few times manually just to check if it's working
     // randomization/time periods will be set up later in the project
     inventorySimulation(inventory, season1, "delivery", dummyVariable1C, 1);
+    inventorySimulation(inventory, season2, "theft", dummyVariable2C, 1);
+    inventorySimulation(inventory, season3, "purchase", dummyVariable3C, 1);
+    inventorySimulation(inventory, season4, "delivery", dummyVariable2C, 1);
+    inventorySimulation(inventory, season1, "theft", dummyVariable2C, 1);
     // output the current inventory after calling the inventorySimulation() function
     displayInventory(inventory);
 
@@ -127,6 +131,7 @@ int main()
 // RETURNS: nothing, void function
 void displayInventory(const map<string, array<list<string>, 3>>& inventory)
 {
+    cout << endl;
     cout << "Current inventory:" << endl;
     
     // create a range-based for loop to access each season (key)
@@ -152,12 +157,12 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
                 name = "groceries";
             }
 
-            cout <<  "" name << ": "; // output the name of the department
+            cout <<  "    Department - " << name << ": "; // output the name of the department
 
         // output the products in each department
         // ensure there is a message that prints if a department has no products (out of stock)
             if (season.second[d].empty()) // .second accesses the value of the map, if a certain department is empty
-                cout << "* Department out of stock *" << endl; // out of stock is displayed
+                cout << "* Department out of stock *"; // out of stock is displayed
             else
                 for (string product : season.second[d]) // display the products in the department
                 {
@@ -204,7 +209,8 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
     }
 
     // output the event data - display that an event is happening, along with its associated season, type of event, department, and product name
-    cout << "Event! " << season << " " << event << ", " << "Department: " << name << " Product: " << product << endl;
+    cout << endl;
+    cout << "Event! " << season << " " << event << ", " << "Department: " << name << ", " << "Product: " << product << endl;
 
     // now that an event has occurred, we have to update the inventory accordingly
     // write code to update the inventory. Inventory will be updated based on any of the 3 event types
