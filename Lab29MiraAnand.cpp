@@ -3,23 +3,34 @@
 // Module 11, Lesson: Software Development Life Cycle, Assignment: Project Proposal, Pseudocode, & Mockup
 // IDE used: Visual Studio Code for Mac
 
-// add a comment "meets requirement" next to lines of code that meet the requirements listed in the "Requirements Analysis"
-// as the project develops, more detailed comments will be added to the program + pseudocode comments may be removed/modified
-// to see the original pseudocode from start to finish, please see these GitHub commits in the "main" branch: "Initial commit - Starting pseudocode" to "Commit - end of pseudocode. Final edits were made"
-// to see the original mockup/wireframe code from start to finish, please see these GitHub commits in the "main" branch: "Commit - Starting mockup/wireframe code" to "Commit - end of mockup/wireframe code. Final edits were made"
-
+// Add a comment "meets requirement" next to lines of code that meet the requirements listed in the "Requirements Analysis"
+// As the project develops, more detailed comments will be added to the program + pseudocode comments may be removed/modified
+// To see the original pseudocode from start to finish, please see these GitHub commits in the "main" branch: "Initial commit - Starting pseudocode" to "Commit - end of pseudocode. Final edits were made"
+// To see the original mockup/wireframe code from start to finish, please see these GitHub commits in the "main" branch: "Commit - Starting mockup/wireframe code" to "Commit - end of mockup/wireframe code. Final edits were made"
+// For mockup/wireframe code, not all pseudocode comments will have code to go with it yet. I want to establish a basic structure first
 // Creation of a retail store inventory simulation (in life) - meets requirement
 
 // include the necessary headers here
+#include <array> // to use std::array
+#include <cstdlib> // for randomization
+#include <ctime> // for randomization
+#include <iostream>
+#include <list> // to use std::list
+#include <map> // to use std::map
+#include <string>
 // define namespace (using namespace std;) after including the headers
+using namespace std;
 
 // include any global const variables here
     // so far, for mockup/wireframe purposes, I am planning on creating a global const dummy variable to use to represent the name of each product
+const string dummyVariable = "product";
 
 // define function prototypes here
     // planning on having 3 functions
     // 1. to output the contents of the inventory - initially (after input file reading) and then after each time period occurs
+    void displayInventory(const map<string, array<list<string>, 3>>& inventory);
     // 2. to perform the actual inventory simulation (when inventory-related events occur)
+    void inventorySimulation(map<string, array<list<string>, 3>>& inventory,)
     // 3. a helper function to assist the inventory simulation function (so the inventory simulation function isn't too complex/cluttered)
 
 // int main() function starts here
