@@ -49,16 +49,24 @@
 
 // int main() function ends here
 
+// make sure to include function header comments here
 // create a function that displays/outputs the current inventory
-    // make sure to include function header comments
-    // the parameter for the function should be our foundational data structure
+// the parameter for the function should be our foundational data structure
     // create a range-based for loop to access each season (key)
         // create a for loop within this range-based for loop to access each department (according to their index)
         // output the products in each department
         // ensure there is a message that prints if a department has no products (out of stock)
 
+// make sure to include function header comments here
 // create a function that performs the actual inventory simulation
-    // make sure to include function header comments
-    // this function will include various parameters:
-    // 1. our foundational data structure
-    // 2. 
+// this function will include various parameters:
+// 1. our foundational data structure
+// 2. the season
+// 3. the department
+// 4. the type of inventory-related event
+// 5. the name of the product
+    // write code (similar/same to the code in the output function) that associates a department with an index (#)
+    // output the event data - display that an event is happening, and its associated season, type of event, department, and product name
+    // now that we have outputted that an event has occurred, we have to update the inventory accordingly
+    // write code to update the inventory. Inventory will be updated based on any of the 3 event types
+    // this function our helper function will be utilized here to ensure that a purchase or theft cannot happen if a department has no products (is out of stock)
