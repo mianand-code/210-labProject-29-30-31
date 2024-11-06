@@ -23,7 +23,21 @@ using namespace std;
 
 // include any global const variables here
     // so far, for mockup/wireframe purposes, I am planning on creating a global const dummy variable to use to represent the name of each product
-const string dummyVariable = "product";
+    // I will actually create 1 for each season's department, for clarity in each season/department
+const string dummyVariable1E = "spring_electronics";
+const string dummyVariable2E = "summer_electronics";
+const string dummyVariable3E = "fall_electronics";
+const string dummyVariable4E = "winter_electronics";
+
+const string dummyVariable1C = "spring_clothing";
+const string dummyVariable2C = "summer_clothing";
+const string dummyVariable3C = "fall_clothing";
+const string dummyVariable4C = "winter_clothing";
+
+const string dummyVariable1G = "spring_groceries";
+const string dummyVariable2G = "summer_groceries";
+const string dummyVariable3G = "fall_groceries";
+const string dummyVariable4G = "winter_groceries";
     // adding 4 more global const variables for mockup/wireframe purposes, to represent each of the 4 seasons when manually initializing the inventory for now
 const string season1 = "Spring";
 const string season2 = "Summer";
@@ -66,26 +80,27 @@ int main()
     // later on, I will add code as explained in the block above to read inventory data from the input file instead
     // when I add code that will read from the input file, this code block will be removed
     // to manually initialize - for each of the 4 seasons, each of the 3 departments will start off with 2 products
-    // for product name - I will be using my global const dummy variable to set the universal name for all products
+    // for product name - I will be using my global const dummy variables to set the universal name for products
     // [0] = electronics, [1] = clothing, [2] = groceries
-    inventory[season1][0] = {dummyVariable, dummyVariable}; // Spring, electronics
-    inventory[season1][1] = {dummyVariable, dummyVariable}; // Spring, clothing
-    inventory[season1][2] = {dummyVariable, dummyVariable}; // Spring, groceries
+    inventory[season1][0] = {dummyVariable1E, dummyVariable1E}; // Spring, electronics
+    inventory[season1][1] = {dummyVariable1C, dummyVariable1C}; // Spring, clothing
+    inventory[season1][2] = {dummyVariable1G, dummyVariable1G}; // Spring, groceries
 
-    inventory[season2][0] = {dummyVariable, dummyVariable}; // Summer, electronics
-    inventory[season2][1] = {dummyVariable, dummyVariable}; // Summer, clothing
-    inventory[season2][2] = {dummyVariable, dummyVariable}; // Summer, groceries
+    inventory[season2][0] = {dummyVariable2E, dummyVariable2E}; // Summer, electronics
+    inventory[season2][1] = {dummyVariable2C, dummyVariable2C}; // Summer, clothing
+    inventory[season2][2] = {dummyVariable2G, dummyVariable2G}; // Summer, groceries
 
-    inventory[season3][0] = {dummyVariable, dummyVariable}; // Fall, electronics
-    inventory[season3][1] = {dummyVariable, dummyVariable}; // Fall, clothing
-    inventory[season3][2] = {dummyVariable, dummyVariable}; // Fall, groceries
+    inventory[season3][0] = {dummyVariable3E, dummyVariable3E}; // Fall, electronics
+    inventory[season3][1] = {dummyVariable3C, dummyVariable3C}; // Fall, clothing
+    inventory[season3][2] = {dummyVariable3G, dummyVariable3G}; // Fall, groceries
 
-    inventory[season4][0] = {dummyVariable, dummyVariable}; // Winter, electronics
-    inventory[season4][1] = {dummyVariable, dummyVariable}; // Winter, clothing
-    inventory[season4][2] = {dummyVariable, dummyVariable}; // Winter, groceries
+    inventory[season4][0] = {dummyVariable4E, dummyVariable4E}; // Winter, electronics
+    inventory[season4][1] = {dummyVariable4C, dummyVariable4C}; // Winter, clothing
+    inventory[season4][2] = {dummyVariable4G, dummyVariable4G}; // Winter, groceries
 
     // after manually initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
+    cout << "Starting/"
 
     // create a for loop to perform the inventory simulation over 25 time periods (which represent days) - meets requirement
         // within the for loop, we need to randomly select a # of inventory-related events to occur
