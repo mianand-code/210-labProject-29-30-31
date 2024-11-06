@@ -247,5 +247,9 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
 // if the department + product is in stock, a theft or purchase can happen at any time, and if it happens, the product will be removed from the department's inventory once
 bool checkUpdateInventoryStock(list<string>& departments, string product)
 {
-
+    // create a for loop that uses an iterator to start at the beginning of the std::list and continue until the end
+    for (auto it = departments.begin(); it != departments.end(); it++)
+    {
+        
+    }
 }
