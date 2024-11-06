@@ -4,6 +4,9 @@
 // IDE used: Visual Studio Code for Mac
 
 // add a comment "meets requirement" next to lines of code that meet the requirements listed in the "Requirements Analysis"
+// as the project develops, more detailed comments will be added to the program + pseudocode comments may be removed/modified
+// to see the original pseudocode from start to finish, please see these GitHub commits in the "main" branch: "Initial commit - Starting pseudocode" to "Commit - end of pseudocode. Final edits were made"
+// to see the original mockup/wireframe code from start to finish, please see these GitHub commits in the "main" branch: "Commit - Starting mockup/wireframe code" to "Commit - end of mockup/wireframe code. Final edits were made"
 
 // Creation of a retail store inventory simulation (in life) - meets requirement
 
