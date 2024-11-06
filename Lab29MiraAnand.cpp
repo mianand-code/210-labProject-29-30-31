@@ -79,24 +79,24 @@ int main()
     // for mockup/wireframe purposes, I will be initializing the inventory manually
     // later on, I will add code as explained in the block above to read inventory data from the input file instead
     // when I add code that will read from the input file, this code block will be removed
-    // to manually initialize - for each of the 4 seasons, each of the 3 departments will start off with 2 products
+    // to manually initialize - for each of the 4 seasons, each of the 3 departments will start off with 1 product
     // for product name - I will be using my global const dummy variables to set the universal name for products
     // [0] = electronics, [1] = clothing, [2] = groceries
-    inventory[season1][0] = {dummyVariable1E, dummyVariable1E}; // Spring, electronics
-    inventory[season1][1] = {dummyVariable1C, dummyVariable1C}; // Spring, clothing
-    inventory[season1][2] = {dummyVariable1G, dummyVariable1G}; // Spring, groceries
+    inventory[season1][0] = {dummyVariable1E}; // Spring, electronics
+    inventory[season1][1] = {dummyVariable1C}; // Spring, clothing
+    inventory[season1][2] = {dummyVariable1G}; // Spring, groceries
 
-    inventory[season2][0] = {dummyVariable2E, dummyVariable2E}; // Summer, electronics
-    inventory[season2][1] = {dummyVariable2C, dummyVariable2C}; // Summer, clothing
-    inventory[season2][2] = {dummyVariable2G, dummyVariable2G}; // Summer, groceries
+    inventory[season2][0] = {dummyVariable2E}; // Summer, electronics
+    inventory[season2][1] = {dummyVariable2C}; // Summer, clothing
+    inventory[season2][2] = {dummyVariable2G}; // Summer, groceries
 
-    inventory[season3][0] = {dummyVariable3E, dummyVariable3E}; // Fall, electronics
-    inventory[season3][1] = {dummyVariable3C, dummyVariable3C}; // Fall, clothing
-    inventory[season3][2] = {dummyVariable3G, dummyVariable3G}; // Fall, groceries
+    inventory[season3][0] = {dummyVariable3E}; // Fall, electronics
+    inventory[season3][1] = {dummyVariable3C}; // Fall, clothing
+    inventory[season3][2] = {dummyVariable3G}; // Fall, groceries
 
-    inventory[season4][0] = {dummyVariable4E, dummyVariable4E}; // Winter, electronics
-    inventory[season4][1] = {dummyVariable4C, dummyVariable4C}; // Winter, clothing
-    inventory[season4][2] = {dummyVariable4G, dummyVariable4G}; // Winter, groceries
+    inventory[season4][0] = {dummyVariable4E}; // Winter, electronics
+    inventory[season4][1] = {dummyVariable4C}; // Winter, clothing
+    inventory[season4][2] = {dummyVariable4G}; // Winter, groceries
 
     // after manually initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
@@ -112,6 +112,8 @@ int main()
     // for mockup/wireframe purposes, I will call the function a few times manually just to check if it's working
     // randomization/time periods will be set up later in the project
     inventorySimulation(inventory, season1, "delivery", dummyVariable1C, 1);
+    // output the current inventory after calling the inventorySimulation() function
+    displayInventory(inventory);
 
     // make sure to add return 0; at the end of main()
     return 0;
@@ -150,7 +152,7 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
                 name = "groceries";
             }
 
-            cout << name << ": "; // output the name of the department
+            cout <<  "" name << ": "; // output the name of the department
 
         // output the products in each department
         // ensure there is a message that prints if a department has no products (out of stock)
@@ -161,6 +163,8 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
                 {
                     cout << product << " ";
                 }
+
+                cout << endl;
         }
     }
 }
@@ -200,7 +204,7 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
     }
 
     // output the event data - display that an event is happening, along with its associated season, type of event, department, and product name
-    cout << "Event! " << season << event << ", " << "Department: " << name << " Product: " << product << endl;
+    cout << "Event! " << season << " " << event << ", " << "Department: " << name << " Product: " << product << endl;
 
     // now that an event has occurred, we have to update the inventory accordingly
     // write code to update the inventory. Inventory will be updated based on any of the 3 event types
