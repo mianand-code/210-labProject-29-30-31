@@ -50,23 +50,40 @@
 // int main() function ends here
 
 // make sure to include function header comments here
+// DESCRIPTION:
+// ARGUMENTS: the parameter for the function should be our foundational data structure
+// RETURNS:
 // create a function that displays/outputs the current inventory
-// the parameter for the function should be our foundational data structure
     // create a range-based for loop to access each season (key)
         // create a for loop within this range-based for loop to access each department (according to their index)
         // output the products in each department
         // ensure there is a message that prints if a department has no products (out of stock)
 
 // make sure to include function header comments here
+// DESCRIPTION:
+// ARGUMENTS:
+    // this function will include various parameters:
+    // 1. our foundational data structure
+    // 2. the season
+    // 3. the department
+    // 4. the type of inventory-related event
+    // 5. the name of the product
+// RETURNS: 
 // create a function that performs the actual inventory simulation
-// this function will include various parameters:
-// 1. our foundational data structure
-// 2. the season
-// 3. the department
-// 4. the type of inventory-related event
-// 5. the name of the product
-    // write code (similar/same to the code in the output function) that associates a department with an index (#)
+    // write code (similar to/same as the code in the output function) that associates a department with an index (#)
     // output the event data - display that an event is happening, and its associated season, type of event, department, and product name
     // now that we have outputted that an event has occurred, we have to update the inventory accordingly
     // write code to update the inventory. Inventory will be updated based on any of the 3 event types
     // this function our helper function will be utilized here to ensure that a purchase or theft cannot happen if a department has no products (is out of stock)
+
+// make sure to include function header comments here
+// DESCRIPTION:
+// ARGUMENTS:
+    // the parameters for the function should include:
+    // 1. the list that holds the string values that represent the names of the departments
+    // 2. the product name (in order to be removed from inventory)
+// RETURNS:
+// create a helper function that works with the inventory simulation function
+// creating this as a function to ensure that the inventory simulation function isn't too complex
+// this function will help ensure that a theft or purchase only occurs within a department that has products, and is not out of stock
+// if the department + product is in stock, a theft or purchase can happen at any time, and if it happens, the product will be removed from the department's inventory
