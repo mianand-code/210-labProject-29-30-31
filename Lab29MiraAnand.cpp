@@ -148,10 +148,16 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
 
             cout << name << ": "; // output the name of the department
 
-            if (season.second[d].empty())
-        }
         // output the products in each department
         // ensure there is a message that prints if a department has no products (out of stock)
+            if (season.second[d].empty()) // .second accesses the value of the map, if a certain department is empty
+                cout << "* Department out of stock *" << endl; // out of stock is displayed
+            else
+                for (string product : season.second[d]) // display the products in the department
+                {
+                    cout << product << " ";
+                }
+        }
     }
 }
 
@@ -177,6 +183,10 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
     // products should/can be delivered to departments that have no stock
     // if a duplicate product is being delivered (to "top off" the inventory), the product's name should show more than once
     // products delivered to a department should be related/belong to their specific department
+void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string season, string event, string product, int department)
+{
+    cout << "Event! " << season << 
+}
 
 // make sure to include function header comments here
 // create a helper function that works with the inventory simulation function - meets requirement
