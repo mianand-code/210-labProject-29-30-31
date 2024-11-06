@@ -31,4 +31,13 @@
 
     // for mockup/wireframe purposes, I am initializing the inventory manually
     // later on, I will add code as explained in the block above to read inventory data from the input file instead
-    // when I add code to read from the input file, this code to initialize the inventory manually will be removed
+    // when I add code to read from the input file, this code to manually initialize the inventory will be removed
+    // to manually initialize - for each of the 4 seasons, each of the 3 departments will start off with 2 products
+    // for product name - I will be using my global const dummy variable to set the name of all products
+
+    // after manually initializing the inventory, we need to display the initial state of the inventory (environment)
+    // we will call our output function to accomplish this
+
+    // create a for loop to perform the inventory simulation over 25 time periods (which represent days)
+        // within the for loop, we need to randomly select a # of inventory-related events to occur
+        // based on , we need to randomly select a season, department, and type of inventory-related event to occur 
