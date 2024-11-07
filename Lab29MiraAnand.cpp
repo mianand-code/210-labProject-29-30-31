@@ -3,17 +3,19 @@
 // Module 11, Lesson: Software Development Life Cycle, Assignment: Project Proposal, Pseudocode, & Mockup
 // IDE used: Visual Studio Code for Mac
 
-// Add a comment "meets requirement" next to lines of code that meet the requirements listed in the "Requirements Analysis"
-// As the project develops, more detailed comments will be added to the program + pseudocode comments may be removed/modified
+// Add a comment ("meets requirement") next to lines of code that meet the requirements listed in the "Requirements Analysis"
+// As the project develops, more detailed comments will be added to the program + pseudocode comments may be removed/modified as needed
+// All changes to the program will happen in this file "Lab29MiraAnand.cpp", but different branches will be utilized
 // To see the original pseudocode from start to finish, please see these GitHub commits in the "main" branch: "Initial commit - Starting pseudocode" to "Commit - end of pseudocode. Final edits were made"
-// To see the original mockup/wireframe code from start to finish, please see these GitHub commits in the "main" branch: "Commit - Starting mockup/wireframe code" to "Commit - end of mockup/wireframe code. Final edits were made"
+// To see the original mockup/wireframe code from start to finish, please see these GitHub commits in the "main" branch: "Commit - Starting mockup/wireframe code" to "Commit - End of mockup/wireframe code. Final edits were made"
 // For mockup/wireframe code, not all pseudocode comments will have code to go with it yet. I want to establish a basic structure first
+
 // Creation of a retail store inventory simulation (in life) - meets requirement
 
 // include the necessary headers here
 #include <array> // to use std::array
-#include <cstdlib> // for randomization
-#include <ctime> // for randomization
+#include <cstdlib> // for randomization - not using this yet in mockup/wireframe
+#include <ctime> // for randomization - not using this yet in mockup/wireframe
 #include <iostream>
 #include <list> // to use std::list
 #include <map> // to use std::map
@@ -23,7 +25,7 @@ using namespace std;
 
 // include any global const variables here
     // so far, for mockup/wireframe purposes, I am planning on creating a global const dummy variable to use to represent the name of each product
-    // I will actually create 1 for each season's department, for clarity in each season/department
+    // I will create 1 dummy variable for each season's department, for clarity when outputting season/department
 const string dummyVariable1E = "spring_electronics";
 const string dummyVariable2E = "summer_electronics";
 const string dummyVariable3E = "fall_electronics";
@@ -38,7 +40,7 @@ const string dummyVariable1G = "spring_groceries";
 const string dummyVariable2G = "summer_groceries";
 const string dummyVariable3G = "fall_groceries";
 const string dummyVariable4G = "winter_groceries";
-    // adding 4 more global const variables for mockup/wireframe purposes, to represent each of the 4 seasons when manually initializing the inventory for now
+    // adding 4 more global const variables for mockup/wireframe purposes, to represent each of the 4 seasons (to be used when manually initializing the inventory for now)
 const string season1 = "Spring";
 const string season2 = "Summer";
 const string season3 = "Fall";
@@ -47,7 +49,7 @@ const string season4 = "Winter";
 // define function prototypes here
     // planning on having 3 functions
     // 1. to output the contents of the inventory - initially (after input file reading) and then after each time period occurs
-void displayInventory(const map<string, array<list<string>, 3>>& inventory);
+void displayInventory(const map<string, array<list<string>, 3>> inventory);
     // 2. to perform the actual inventory simulation (when inventory-related events occur)
 void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string, string, string, int);
     // 3. a helper function to assist the inventory simulation function (so the inventory simulation function isn't too complex/cluttered)
@@ -74,7 +76,7 @@ int main()
     // should check for & report any errors when opening the input file. Program should not proceed unless input file is successfully opened
     // a comment should be included in this code block to ensure that the user understands that the input file should be structured exactly the way I have it in order for the program to operate successfully
     // for each line in the input file, extract the key (season) and the product name
-    // insert the product into its corresponding list (Clothing, Electronics, Groceries) in the array for their season
+    // insert the product into its corresponding list (electronics, clothing, groceries) in the array for their season
 
     // for mockup/wireframe purposes, I will be initializing the inventory manually
     // later on, I will add code as explained in the block above to read inventory data from the input file instead
@@ -111,11 +113,11 @@ int main()
 
     // for mockup/wireframe purposes, I will call the function a few times manually just to check if it's working
     // randomization/time periods will be set up later in the project
+    // hardcoding parameters will also be removed and adjusted later
     inventorySimulation(inventory, season1, "delivery", dummyVariable1C, 1);
     inventorySimulation(inventory, season2, "theft", dummyVariable2C, 1);
     inventorySimulation(inventory, season3, "purchase", dummyVariable3C, 1);
-    inventorySimulation(inventory, season4, "delivery", dummyVariable2C, 1);
-    inventorySimulation(inventory, season1, "theft", dummyVariable2C, 1);
+    inventorySimulation(inventory, season3, "theft", dummyVariable3C, 1);
     // output the current inventory after calling the inventorySimulation() function
     displayInventory(inventory);
 
@@ -125,11 +127,11 @@ int main()
 } // int main() function ends here
 
 // make sure to include function header comments here
-// void displayInventory(const map<string, array<list<string>, 3>>& inventory) function header
+// void displayInventory(const map<string, array<list<string>, 3>> inventory) function header
 // DESCRIPTION: create a function that displays/outputs the contents of our foundational data structure (current inventory) - meets requirement
-// ARGUMENTS: the parameter for the function should be our foundational data structure - const map<string, array<list<string>, 3>>& inventory
+// ARGUMENTS: the parameter for the function should be our foundational data structure - const map<string, array<list<string>, 3>> inventory
 // RETURNS: nothing, void function
-void displayInventory(const map<string, array<list<string>, 3>>& inventory)
+void displayInventory(const map<string, array<list<string>, 3>> inventory)
 {
     cout << endl;
     cout << "Current inventory:" << endl;
@@ -139,7 +141,7 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
     {
         cout << "Season: " << season.first << endl; // access the season (key) using .first
 
-        // create a for loop within this range-based for loop to access each department (according to its index)
+        // create a for loop within this range-based for loop to output each department name (according to its index)
         for (int d = 0; d < 3; d++)
         {
             string name; // to hold the name of a department
@@ -162,7 +164,7 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
         // output the products in each department
         // ensure there is a message that prints if a department has no products (out of stock)
             if (season.second[d].empty()) // .second accesses the value of the map, if a certain department is empty
-                cout << "* Department out of stock *"; // out of stock is displayed
+                cout << "* department out of stock *"; // out of stock is displayed
             else
                 for (string product : season.second[d]) // display the products in the department
                 {
@@ -192,7 +194,7 @@ void displayInventory(const map<string, array<list<string>, 3>>& inventory)
     // products delivered to a department should be related/belong to their specific department
 void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string season, string event, string product, int department)
 {
-    // write code (similar to/same as the code in the output function) that associates a department with an index (#)
+    // write code (similar to/same as the code in the output function) that associates a department with an index #
     string name; // to hold the name of a department
     // associate each department name with an index
     if (department == 0) 
@@ -223,8 +225,8 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
         else if (event == "purchase" || event == "theft") // if a purchase or theft event occurs (which requires removal of a product from inventory)
         {
             // call our helper function here, checkUpdateInventoryStock()
-            // this will check if a department during a season has product in stock before it removes it
-            // if department is in stock, product will be removed once
+            // this will check if a department (during a certain season) has a product in stock before it removes it
+            // if department has stock, product will be removed once
             // if department has no stock, user will be notified that theft or purchase could not occur
             if (checkUpdateInventoryStock(inventory[season][department], product))
             {
@@ -253,20 +255,20 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
 // DESCRIPTION: create a helper function that works with the inventory simulation function - meets requirement
 // ARGUMENTS:
     // the parameters for the function should include:
-    // 1. the std::list that holds the values that represent the names of each department
+    // 1. the std::list that holds the products of a certain department
     // 2. the product name (in order to be removed from inventory)
 // RETURNS: true or false, since it is a bool function
 // creating this as a function to ensure that the inventory simulation function isn't too complex
-// this function will help ensure that a theft or purchase only occurs within a department that has products, and is not out of stock
+// this function will help ensure that a theft or purchase only occurs within a department that has product, and is not out of stock
 // if the department + product is in stock, a theft or purchase can happen at any time, and if it happens, the product will be removed from the department's inventory once
-bool checkUpdateInventoryStock(list<string>& departments, string product)
+bool checkUpdateInventoryStock(list<string>& department, string product)
 {
     // create a for loop that uses an iterator to start at the beginning of the std::list and continue until the end
-    for (auto it = departments.begin(); it != departments.end(); it++) 
+    for (auto it = department.begin(); it != department.end(); it++) 
     {
         if (*it == product) // using * with the iterator to de-reference it, to access product name
         {
-            departments.erase(it); // erase the product at the position of the iterator if the product exists
+            department.erase(it); // erase the product at the position of the iterator if the product exists
             return true;  // true means a product was removed from the department
         }
     }
