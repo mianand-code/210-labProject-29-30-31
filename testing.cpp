@@ -1,4 +1,3 @@
-// include my program header here
 // COMSC-210 | Lab 30 | Mira Anand
 // Module 11, Lesson: Software Development Life Cycle, Assignment: Alpha Release
 // IDE used: Visual Studio Code for Mac
@@ -10,17 +9,15 @@
 
 // Add a comment ("meets requirement") next to lines of code that meet the requirements listed in the "Requirements Analysis"
 // As the project develops, more detailed comments will be added to the program + pseudocode comments may be removed/modified as needed
-// All changes to the program will happen in this file "Lab29MiraAnand.cpp", but different branches will be utilized
-// To see the original pseudocode from start to finish, please see these GitHub commits in the "main" branch: "Initial commit - Starting pseudocode" to "Commit - end of pseudocode. Final edits were made"
-// To see the original mockup/wireframe code from start to finish, please see these GitHub commits in the "main" branch: "Commit - Starting mockup/wireframe code" to "Commit - End of mockup/wireframe code. Final edits were made"
-// For mockup/wireframe code, not all pseudocode comments will have code to go with it yet. I want to establish a basic structure first
+// Not all pseudocode comments will have code to go with it yet. I want to establish a basic structure first
 
 // Creation of a retail store inventory simulation (in life) - meets requirement
 
 // include the necessary headers here
 #include <array> // to use std::array
-#include <cstdlib> // for randomization - not using this yet in mockup/wireframe
-#include <ctime> // for randomization - not using this yet in mockup/wireframe
+#include <cstdlib> // for randomization - not using this yet 
+#include <ctime> // for randomization - not using this yet
+#include <fstream> // for file operations
 #include <iostream>
 #include <list> // to use std::list
 #include <map> // to use std::map
@@ -28,39 +25,34 @@
 // define namespace (using namespace std;) after including the headers
 using namespace std;
 
-// include any global const variables here
-    // so far, for mockup/wireframe purposes, I am planning on creating a global const dummy variable to use to represent the name of each product
-    // I will create 1 dummy variable for each season's department, for clarity when outputting season/department
-const string dummyVariable1E = "spring_electronics";
-const string dummyVariable2E = "summer_electronics";
-const string dummyVariable3E = "fall_electronics";
-const string dummyVariable4E = "winter_electronics";
+// declaration and initialization of global const variables (for driver program purposes as of now)
+// for department name
+const int ELECTRONICS_DEPT = 0; // accessed by [0] in array of std::lists
+const int CLOTHING_DEPT = 1; // accessed by [1] in array of std::lists
+const int GROCERIES_DEPT = 2; // accessed by [2] in array of std::lists
 
-const string dummyVariable1C = "spring_clothing";
-const string dummyVariable2C = "summer_clothing";
-const string dummyVariable3C = "fall_clothing";
-const string dummyVariable4C = "winter_clothing";
+// for event type
+const string DELIVERY_EVENT = "delivery";
+const string PURCHASE_EVENT = "purchase";
+const string THEFT_EVENT = "theft";
 
-const string dummyVariable1G = "spring_groceries";
-const string dummyVariable2G = "summer_groceries";
-const string dummyVariable3G = "fall_groceries";
-const string dummyVariable4G = "winter_groceries";
-    // adding 4 more global const variables for mockup/wireframe purposes, to represent each of the 4 seasons (to be used when manually initializing the inventory for now)
-const string season1 = "Spring";
-const string season2 = "Summer";
-const string season3 = "Fall";
-const string season4 = "Winter";
+// for season name
+const string SEASON_1 = "Spring";
+const string SEASON_2 = "Summer";
+const string SEASON_3 = "Fall";
+const string SEASON_4 = "Winter";
 
-// define function prototypes here
-    // planning on having 3 functions
-    // 1. to output the contents of the inventory - initially (after input file reading) and then after each time period occurs
+// function prototypes
+// 3 functions:
+// 1. to output the contents of the inventory - initially (after input file reading) and then after each time period occurs
 void displayInventory(const map<string, array<list<string>, 3>> inventory);
-    // 2. to perform the actual inventory simulation (when inventory-related events occur)
+// 2. to perform the actual inventory simulation (when inventory-related events occur)
 void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string, string, string, int);
-    // 3. a helper function to assist the inventory simulation function (so the inventory simulation function isn't too complex/cluttered)
+// 3. a helper function to assist the inventory simulation function (so the inventory simulation function isn't too complex/cluttered)
 bool checkUpdateInventoryStock(list<string>&, string);
 
 // int main() function starts here
+// driver program for unit testing starts here
 int main()
 {
     // srand(time(0)); needed as first line in main() for randomization - so inventory simulation is more realistic
@@ -130,6 +122,7 @@ int main()
     return 0;
 
 } // int main() function ends here
+// driver program for unit testing ends here
 
 // make sure to include function header comments here
 // void displayInventory(const map<string, array<list<string>, 3>> inventory) function header
