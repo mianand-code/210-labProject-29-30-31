@@ -16,3 +16,15 @@ If there are no products in stock within a department, an "out of stock" message
 The test for this function will ensure that the current inventory is displayed neatly and correctly each time it is called. 
 We can perform this test by calling the function after reading from our input file to show successful initial inventory population. 
 Then, we can also call the function once again after our simulation occurs to ensure that the inventory state is displayed again, and this time, it will be updated and more current.
+
+For function #2:
+We need to ensure that the inventory simulation occurs correctly.
+This means that the user should be first notified that an event has occurred. The user should be notified (with a console message) of the event type and its associated season, department, and product.
+Our 4 parameters (string season, string event, string product, int department) will be used for this purpose.
+After the user is notified of the event, the inventory needs to be updated correctly based on the type of event that has occurred.
+
+For function #3:
+This is a helper function that goes hand-in-hand with our inventory simulation function. 
+This helper function ensures that a product is in stock within its department before a theft or purchase for that product can occur.
+It then erases the first instance of that product within its associated department (an std::list). This means true is returned to our inventory simulation function.
+False is returned if the product was not found within the department (which means it cannot be stolen or purchased since it is out of stock).
