@@ -59,9 +59,9 @@ int main()
     srand(time(0));
 
     // declaration of variables that will be used to read/hold data from the input file
-    string season;
-    string department;
-    string product;
+    string season; // to hold season name
+    string department; // to hold department name
+    string product; // to hold product name
 
     // creation of the foundational data structure - meets requirement
     // this is the data structure I will be using - map<string, array<list<string>, 3>> inventory;
@@ -71,9 +71,10 @@ int main()
     // - string values that represent product names will be held within each of these std::lists
     map<string, array<list<string>, 3>> inventory;
 
-    // external input file reading code block - meets requirement
-    // the name of the input file is "inventory.txt" and it must contain at least 100 lines of input - meets requirement
-    // note: the input file should be structured exactly the way I have it in order for the program to operate successfully
+    // input file reading code block - meets requirement
+    // for our driver program, my input file (inventory.txt) only contains 36 lines of input for unit testing purposes. I will create another .txt file later for my formal program that contains the required 100 lines of input
+    // "inventory.txt" is only meant to be used in conjunction with this driver program
+    // note: the input file should be structured exactly the way I have it in order for the program to operate successfully. Please open "inventory.txt" to see exact structure
     // will check for & report any errors when opening the input file. Program will not proceed unless input file is successfully opened
     // for each line in the input file, extract the key (season) and the product name
     // insert the product into its corresponding list (electronics, clothing, groceries) in the array for their season
@@ -109,7 +110,7 @@ int main()
 
     inputFile.close(); // close the input file after reading
 
-    // after manually initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
+    // after initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
     // performing test #1, as stated in "testing.txt"
     cout << "Testing if the input file data was correctly read & if the inventory has been correctly initialized..." << endl;
@@ -121,11 +122,11 @@ int main()
             // call our function that performs the inventory simulation within this second for loop
         // within the 1st for loop, call our output function that will display the current inventory for the current time period after the simulation occurs - meets requirement
 
-    // when performing tests for void inventorySimulation() & bool checkUpdateInventoryStock(), the function parameters (when calling the functions) will be hardcoded
-    // this is just for simplicity when conducting unit testing and so we have direct control of the functions/situations we are testing
+    // when performing tests for void inventorySimulation() & bool checkUpdateInventoryStock(), the function parameters (when calling the functions) will be hardcoded/not chosen randomly
+    // the reason for this is so have direct control of the functions/situations we are unit testing
     // performing test #2 and test #6, as stated in "testing.txt"
     cout << endl;
-    cout << "Simulating a delivery + ensuring a duplicate product being delivered is shown twice to indicate multiple quantities..." << endl;
+    cout << "Simulating a delivery + testing to make sure that a duplicate product being delivered is shown twice to indicate multiple quantities..." << endl;
     inventorySimulation(inventory, SEASON_1, DELIVERY_EVENT, "phone", ELECTRONICS_DEPT);
     cout <<  endl << "Simulating a purchase..." << endl;
     inventorySimulation(inventory, SEASON_2, PURCHASE_EVENT, "t-shirt", CLOTHING_DEPT);
@@ -149,31 +150,40 @@ int main()
     cout << endl << "Delivering to departments that are out of stock to ensure that they can be replenished if needed..." << endl;
     inventorySimulation(inventory, SEASON_2, DELIVERY_EVENT, "t-shirt", CLOTHING_DEPT);
     inventorySimulation(inventory, SEASON_3, DELIVERY_EVENT, "apple", GROCERIES_DEPT);
-    cout << endl << "Here is the updated inventory after the delivery to out of stock departments..." << endl;
+    cout << endl << "Here is the updated inventory after delivering to out of stock departments..." << endl;
     displayInventory(inventory);
 
-    // testing 3rd function, bool checkUpdateInventoryStock, on its own
-    // performing test #3 and test #4, as stated in "testing.txt"
+    // testing 3rd function, bool checkUpdateInventoryStock(), on its own
+    // performing test #4, as stated in "testing.txt"
     list<string> groceriesTest = { "apple", "apple", "banana", "orange" }; // creating a sample std::list to work with for purposes of unit testing
 
-    cout << endl << "Testing helper function..." << endl;
+    cout << endl << "Testing helper function (on its own)..." << endl;
     cout << endl << "Here is the department (std::list) before purchasing/stealing an apple:" << endl;
     for (string product : groceriesTest) // range-based for loop to traverse through the list
         cout << product << " ";
     
     cout << endl;
 
-    bool test = checkUpdateInventoryStock(groceriesTest, "apple"); // create a bool, since it is a bool function
+    bool test = checkUpdateInventoryStock(groceriesTest, "apple"); // create a bool and call the function. True or false will be stored in our created bool
     if (test) // if product was found in list
-        cout << endl << "apple was purchased/stolen." << endl;
+        cout << endl << "event - apple was purchased/stolen." << endl;
     else // if product was not found in list
-        cout << "apple not in stock." << endl;
+        cout << "result - apple not in stock." << endl;
     
     cout << endl << "Here is the updated department (std::list) after purchasing/stealing an apple. Only one should be purchased or stolen/removed..." << endl;
     for (string product : groceriesTest) // range-based for loop to traverse through the list
         cout << product << " ";
     
     cout << endl;
+
+    // performing test #3, as stated in "testing.txt"
+    cout << endl << "Testing helper function (on its own) again..." << endl;
+    cout << endl << "Attempting to purchase/steal milk, which is not in stock..." << endl;
+        bool test1 = checkUpdateInventoryStock(groceriesTest, "milk"); // create a bool and call the function. True or false will be stored in our created bool
+    if (test1) // if product was found in list
+        cout << endl << "event - milk was purchased/stolen." << endl;
+    else // if product was not found in list
+        cout << "result - milk not in stock." << endl;
 
     return 0; // make sure to add return 0; at the end of main()
 
