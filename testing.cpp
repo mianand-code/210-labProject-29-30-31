@@ -155,7 +155,18 @@ int main()
 
     // testing 3rd function, bool checkUpdateInventoryStock, on its own
     // performing test #3 and test #4, as stated in "testing.txt"
-    list<string> groceriesTest = { "apple", "apple", "banana", "orange" };
+    list<string> groceriesTest = { "apple", "apple", "banana", "orange" }; // creating a sample std::list to work with for purposes of unit testing
+    bool test = checkUpdateInventoryStock(groceriesTest, "apple"); // create a bool, since it is a bool function
+    if (test) // if product was found in list
+        cout << "apple was purchased." << endl;
+    else // if product was not found in list
+        cout << "apple not in stock." << endl;
+    
+    cout << "Here is the updated department (std::list) after purchasing an apple. Only one should be purchased/removed..." << endl << endl;
+    for (string product : groceriesTest) // range-based for loop to traverse through the list
+        cout << product << " ";
+    
+    cout << endl;
 
     return 0; // make sure to add return 0; at the end of main()
 
