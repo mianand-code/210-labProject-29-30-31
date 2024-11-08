@@ -71,6 +71,11 @@ int main()
     string department; // to hold department name
     string product; // to hold product name
 
+    // declaration and initialization of arrays that will assist with selecting random events, seasons, and departments
+    const string events[] = {DELIVERY_EVENT, PURCHASE_EVENT, THEFT_EVENT}; // for events
+    const string seasons[] = {SEASON_1, SEASON_2, SEASON_3, SEASON_4}; // for seasons
+    const string departments[] {ELECTRONICS_DEPT_NAME, CLOTHING_DEPT_NAME, GROCERIES_DEPT_NAME}; // for departments
+
     // input file reading code block - meets requirement
     //  - will check for & report any errors when opening the input file. Program will not proceed unless input file is successfully opened
     //  - for each line in the input file, extract the key (season) and the product name
@@ -79,10 +84,10 @@ int main()
     // I am deciding to change this format, just to make reading from the input file easier
     // each season, department, and product name will now have its own line in the input file, in that order. No spaces, department name is case sensitive
     // my input file "inventory.txt" used for my driver program is also meant to be used in conjunction with this Alpha Release. It only contains 36 lines of input, which is a good amount of model data to work with for this release
-    // I will create another .txt file later for my beta program that contains the required 100 lines of input
+    // I will create another .txt file later for my Beta Release that contains the required 100 lines of input
     // note: the input file should be structured exactly the way I have it in order for the program to operate successfully. Please open "inventory.txt" to see exact structure
     // I am taking my input file reading code block from the driver program (testing.cpp) that I created
-    // to see my progression while coding this block, please see my commits that relate to my driver program within the "alpha branch"
+    // to see my progression while coding this block, please see my commits that relate to my driver program within the "alpha" branch
 
     ifstream inputFile("inventory.txt"); // creating an ifstream object to open the input file
     if (!inputFile) // if the input file does not open
@@ -120,6 +125,11 @@ int main()
     displayInventory(inventory); // displayInventory() function call, to display the current inventory
 
     // create a for loop to perform the inventory simulation over 25 time periods (which represent days) - meets requirement
+    // for my Alpha Release, I will start off with 5 time periods (instead of 25) just to approximate functionality - to make sure time periods run and randomization works
+    for (int days = 1; days <= 5; days++)
+    {
+        cout << "*** Day #" << days << " ***"
+    }
         // within the for loop, we need to randomly select a # of inventory-related events to occur
             // based on this # of random events (create another for loop), we need to randomly select a season, department, and type of inventory-related event to occur 
             // call our function that performs the inventory simulation within this second for loop
