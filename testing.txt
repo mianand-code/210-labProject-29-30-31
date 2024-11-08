@@ -3,3 +3,16 @@
 // IDE used: Visual Studio Code for Mac
 
 // To see my testing description write-up from start to finish, please see these GitHub commits in the "alpha" branch: "Initial commit - Starting testing description write-up" to "Commit - End of testing description write-up. Final edits were made"
+
+The driver program I am creating for unit testing should test/verify that the 3 functions I created for my inventory simulation program are working as expected:
+1. void displayInventory(const map<string, array<list<string>, 3>> inventory)
+2. void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string season, string event, string product, int department)
+3. bool checkUpdateInventoryStock(list<string>& department, string product)
+
+For function #1:
+We need to ensure that the inventory data is displayed neatly. Each time this function is called, the "current inventory" state should be displayed.
+This function's output should include season name and department name. The product names within each department should also be displayed.
+If there are no products in stock within a department, an "out of stock" message for the department should be displayed.
+The test for this function will ensure that the current inventory is displayed neatly and correctly each time it is called. 
+We can perform this test by calling the function after reading from our input file to show successful initial inventory population. 
+Then, we can also call the function once again after our simulation occurs to ensure that the inventory state is displayed again, and this time, it will be updated and more current.
