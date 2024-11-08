@@ -91,12 +91,26 @@ int main()
         if (!getline(inputFile, department)) break;
         if (!getline(inputFile, product)) break;
 
-        if (department == )
+        if (department == "electronics") // if the department name is electronics
+        {
+            inventory[season][ELECTRONICS_DEPT].push_back(product); // add the product to the end of the list, according to its season and associated index
+        }
+        else if (department == "clothing") // if the department name is clothing
+        {
+            inventory[season][CLOTHING_DEPT].push_back(product); // add the product to the end of the list, according to its season and associated index
+        }
+        else if (department == "groceries") // if the department name is groceries
+        {
+            inventory[season][GROCERIES_DEPT].push_back(product); // add the product to the end of the list, according to its season and associated index
+        }
     }
+
+    inputFile.close(); // close the input file after reading
 
     // after manually initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
-    cout << "Starting/Initial inventory:" << endl;
+    // performing test #1, as stated in "testing.txt"
+    cout << "Testing if the input file data was correctly read & if the inventory has been correctly " << endl;
     displayInventory(inventory); // displayInventory() function call, to display the current inventory
 
     // create a for loop to perform the inventory simulation over 25 time periods (which represent days) - meets requirement
@@ -105,18 +119,7 @@ int main()
             // call our function that performs the inventory simulation within this second for loop
         // within the 1st for loop, call our output function that will display the current inventory for the current time period after the simulation occurs - meets requirement
 
-    // for mockup/wireframe purposes, I will call the function a few times manually just to check if it's working
-    // randomization/time periods will be set up later in the project
-    // hardcoding parameters will also be removed and adjusted later
-    inventorySimulation(inventory, season1, "delivery", dummyVariable1C, 1);
-    inventorySimulation(inventory, season2, "theft", dummyVariable2C, 1);
-    inventorySimulation(inventory, season3, "purchase", dummyVariable3C, 1);
-    inventorySimulation(inventory, season3, "theft", dummyVariable3C, 1);
-    // output the current inventory after calling the inventorySimulation() function
-    displayInventory(inventory);
-
-    // make sure to add return 0; at the end of main()
-    return 0;
+    return 0; // make sure to add return 0; at the end of main()
 
 } // int main() function ends here
 // driver program for unit testing ends here
