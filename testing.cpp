@@ -126,6 +126,22 @@ int main()
     // performing test #2 and test #6, as stated in "testing.txt"
     cout << "Simulating a delivery + ensuring a duplicate product being delivered is shown twice to indicate multiple quantities..." << endl << endl;
     inventorySimulation(inventory, SEASON_1, DELIVERY_EVENT, "phone", ELECTRONICS_DEPT);
+    cout << "Simulating a purchase..." << endl << endl;
+    inventorySimulation(inventory, SEASON_2, PURCHASE_EVENT, "t-shirt", CLOTHING_DEPT);
+    cout << "Simulating a theft..." << endl << endl;
+    inventorySimulation(inventory, SEASON_3, THEFT_EVENT, "apple", GROCERIES_DEPT);
+    cout << "Here is the updated inventory after the simulated delivery, purchase, and theft..." << endl;
+    displayInventory(inventory);
+
+    // performing test #3, as stated in "testing.txt"
+    cout << "Trying to purchase & steal from a department that has no stock..." << endl << endl;
+    inventorySimulation(inventory, SEASON_2, PURCHASE_EVENT, "t-shirt", CLOTHING_DEPT);
+    inventorySimulation(inventory, SEASON_3, THEFT_EVENT, "apple", GROCERIES_DEPT);
+    cout << "Here is the updated inventory after attempting to purchase & steal from a department that has no stock..." << endl;
+    displayInventory(inventory);
+
+    // performing test #4, as stated in "testing.txt"
+    cout << "Purchasing from a department that has multiple quantities in stock to ensure that only 1 product is removed..." << endl << endl;
 
     return 0; // make sure to add return 0; at the end of main()
 
