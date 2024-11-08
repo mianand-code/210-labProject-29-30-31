@@ -41,4 +41,25 @@ We can perform this check by using the displayInventory() function after we read
 Test #2 -
 Purchases or thefts should not be allowed when a department has no product in stock.
 The user should be notified that there the event was attempted, but is no product to steal/purchase.
-We can perform this check by using the  
+We can perform this check by using the inventorySimulation() and checkUpdateInventoryStock() functions in conjunction.
+
+Test #3 -
+If a product is stolen or purchased, only 1 of those products should be removed from the inventory (if there are multiple quantities of the same product).
+This is done to indicate purchase/theft of ONE item.
+
+For example: 
+Season: Fall
+    Department - electronics: phone, phone
+If a phone is purchased...
+Department should update to...
+    Department - electronics: phone
+
+We can perform this check by using the checkUpdateInventoryStock() function.
+
+Test #4 -
+Products should/can be delivered to departments that are "out of stock". This applies specifically to the "delivery" event.
+We can perform this check by using the inventorySimulation() function.
+
+Test #5 -
+If a duplicate product is being delivered to "top off" inventory, the product name should show in the department more than once to indicate presence of multiple quantities.
+We can perform this check by using the inventorySimulation() function.
