@@ -58,44 +58,41 @@ int main()
     // srand(time(0)); needed as first line in main() for randomization - so inventory simulation is more realistic
     srand(time(0));
 
+    // declaration of variables that will be used to read/hold data from the input file
+    string season;
+    string department;
+    string product;
+
     // creation of the foundational data structure - meets requirement
     // this is the data structure I will be using - map<string, array<list<string>, 3>> inventory;
-    // I need to include detailed comments that explain this data structure piece by piece
     // - creation of an std::map named "inventory"
     // - the key is a string variable that represents a season: Spring, Summer, Fall, Winter
     // - the value is an std::array of 3 std::lists. These std::lists represent different store departments: electronics, clothing, groceries
-    // - string values of product names will be held within each of these std::lists
+    // - string values that represent product names will be held within each of these std::lists
     map<string, array<list<string>, 3>> inventory;
 
-    // external input file reading should happen here - meets requirement
-    // I can either create a function for this process or I can handle it in main()
-    // the name of the input file should be "inventory.txt" and it must contain at least 100 lines of input - meets requirement
-    // should check for & report any errors when opening the input file. Program should not proceed unless input file is successfully opened
-    // a comment should be included in this code block to ensure that the user understands that the input file should be structured exactly the way I have it in order for the program to operate successfully
+    // external input file reading code block - meets requirement
+    // the name of the input file is "inventory.txt" and it must contain at least 100 lines of input - meets requirement
+    // note: the input file should be structured exactly the way I have it in order for the program to operate successfully
+    // will check for & report any errors when opening the input file. Program will not proceed unless input file is successfully opened
     // for each line in the input file, extract the key (season) and the product name
     // insert the product into its corresponding list (electronics, clothing, groceries) in the array for their season
+    ifstream inputFile("inventory.txt"); // creating an ifstream object to open the input file
+    if (!inputFile) // if the input file does not open
+    {
+        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location and try running the program again." << endl;
+        cout << "Program will now exit..." << endl;
+        return 1; // exit and return an error state
+    }
 
-    // for mockup/wireframe purposes, I will be initializing the inventory manually
-    // later on, I will add code as explained in the block above to read inventory data from the input file instead
-    // when I add code that will read from the input file, this code block will be removed
-    // to manually initialize - for each of the 4 seasons, each of the 3 departments will start off with 1 product
-    // for product name - I will be using my global const dummy variables to set the universal name for products
-    // [0] = electronics, [1] = clothing, [2] = groceries
-    inventory[season1][0] = {dummyVariable1E}; // Spring, electronics
-    inventory[season1][1] = {dummyVariable1C}; // Spring, clothing
-    inventory[season1][2] = {dummyVariable1G}; // Spring, groceries
+    while (getline(inputFile, season)) // as long as the season is being read from the input file
+    {
+        // break out of the loop if the department or product cannot be read
+        if (!getline(inputFile, department)) break;
+        if (!getline(inputFile, product)) break;
 
-    inventory[season2][0] = {dummyVariable2E}; // Summer, electronics
-    inventory[season2][1] = {dummyVariable2C}; // Summer, clothing
-    inventory[season2][2] = {dummyVariable2G}; // Summer, groceries
-
-    inventory[season3][0] = {dummyVariable3E}; // Fall, electronics
-    inventory[season3][1] = {dummyVariable3C}; // Fall, clothing
-    inventory[season3][2] = {dummyVariable3G}; // Fall, groceries
-
-    inventory[season4][0] = {dummyVariable4E}; // Winter, electronics
-    inventory[season4][1] = {dummyVariable4C}; // Winter, clothing
-    inventory[season4][2] = {dummyVariable4G}; // Winter, groceries
+        if (department == )
+    }
 
     // after manually initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
