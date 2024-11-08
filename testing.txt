@@ -28,3 +28,17 @@ This is a helper function that goes hand-in-hand with our inventory simulation f
 This helper function ensures that a product is in stock within its department before a theft or purchase for that product can occur.
 It then erases the first instance of that product within its associated department (an std::list). This means true is returned to our inventory simulation function.
 False is returned if the product was not found within the department (which means it cannot be stolen or purchased since it is out of stock).
+
+Additionally, we need to ensure that the code block we have in main() for input file reading is initialzing the inventory with data correctly.
+If the input file cannot open successfully, the program should exit. The reason for this is that there is no data to work with if the input file cannot be read from.
+
+Here are some detailed testing notes I have come up with that are easy to follow and will guide the creation of my driver program:
+
+Test #1 -
+Check if the input file was read from successfully and the inventory has been correctly initialized with data from the input file.
+We can perform this check by using the displayInventory() function after we read from the input file.
+
+Test #2 -
+Purchases or thefts should not be allowed when a department has no product in stock.
+The user should be notified that there the event was attempted, but is no product to steal/purchase.
+We can perform this check by using the  
