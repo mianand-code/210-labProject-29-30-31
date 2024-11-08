@@ -85,6 +85,8 @@ int main()
         return 1; // exit and return an error state
     }
 
+    cout << "Input file successfully opened. Now reading data..." << endl << endl; // to test input file functionality, part of test #1 as stated in "testing.txt"
+
     while (getline(inputFile, season)) // as long as the season is being read from the input file
     {
         // break out of the loop if the department or product cannot be read
@@ -110,7 +112,7 @@ int main()
     // after manually initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
     // performing test #1, as stated in "testing.txt"
-    cout << "Testing if the input file data was correctly read & if the inventory has been correctly " << endl;
+    cout << "Testing if the input file data was correctly read & if the inventory has been correctly initialized..." << endl;
     displayInventory(inventory); // displayInventory() function call, to display the current inventory
 
     // create a for loop to perform the inventory simulation over 25 time periods (which represent days) - meets requirement
@@ -118,6 +120,12 @@ int main()
             // based on this # of random events (create another for loop), we need to randomly select a season, department, and type of inventory-related event to occur 
             // call our function that performs the inventory simulation within this second for loop
         // within the 1st for loop, call our output function that will display the current inventory for the current time period after the simulation occurs - meets requirement
+
+    // when performing tests for void inventorySimulation() & bool checkUpdateInventoryStock(), the function parameters (when calling the functions) will be hardcoded
+    // this is just for simplicity when conducting unit testing and so we have direct control of the functions/situations we are testing
+    // performing test #2 and test #6, as stated in "testing.txt"
+    cout << "Simulating a delivery + ensuring a duplicate product being delivered is shown twice to indicate multiple quantities..." << endl << endl;
+    inventorySimulation(inventory, SEASON_1, DELIVERY_EVENT, "phone", ELECTRONICS_DEPT);
 
     return 0; // make sure to add return 0; at the end of main()
 
