@@ -142,6 +142,20 @@ int main()
 
     // performing test #4, as stated in "testing.txt"
     cout << "Purchasing from a department that has multiple quantities in stock to ensure that only 1 product is removed..." << endl << endl;
+    inventorySimulation(inventory, SEASON_1, PURCHASE_EVENT, "phone", ELECTRONICS_DEPT);
+    cout << "Here is the updated inventory after purchasing from a department that has multiple quantities in stock..." << endl;
+    displayInventory(inventory);
+
+    // performing test #5, as stated in "testing.txt"
+    cout << "Delivering to departments that are out of stock to ensure that they can be replenished if needed..." << endl << endl;
+    inventorySimulation(inventory, SEASON_2, DELIVERY_EVENT, "t-shirt", CLOTHING_DEPT);
+    inventorySimulation(inventory, SEASON_3, DELIVERY_EVENT, "apple", GROCERIES_DEPT);
+    cout << "Here is the updated inventory after the delivery to out of stock departments..." << endl;
+    displayInventory(inventory);
+
+    // testing 3rd function, bool checkUpdateInventoryStock, on its own
+    // performing test #3 and test #4, as stated in "testing.txt"
+    list<string> groceriesTest = { "apple", "apple", "banana", "orange" };
 
     return 0; // make sure to add return 0; at the end of main()
 
