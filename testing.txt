@@ -1,0 +1,5 @@
+// COMSC-210 | Lab 30 | Mira Anand
+// Module 11, Lesson: Software Development Life Cycle, Assignment: Alpha Release
+// IDE used: Visual Studio Code for Mac
+
+// To see my testing description write-up from start to finish, please see these GitHub commits in the "alpha" branch: "Initial commit - Starting testing description write-up" to "Commit - End of testing description write-up. Final edits were made"
