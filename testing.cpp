@@ -124,45 +124,52 @@ int main()
     // when performing tests for void inventorySimulation() & bool checkUpdateInventoryStock(), the function parameters (when calling the functions) will be hardcoded
     // this is just for simplicity when conducting unit testing and so we have direct control of the functions/situations we are testing
     // performing test #2 and test #6, as stated in "testing.txt"
-    cout << "Simulating a delivery + ensuring a duplicate product being delivered is shown twice to indicate multiple quantities..." << endl << endl;
+    cout << endl;
+    cout << "Simulating a delivery + ensuring a duplicate product being delivered is shown twice to indicate multiple quantities..." << endl;
     inventorySimulation(inventory, SEASON_1, DELIVERY_EVENT, "phone", ELECTRONICS_DEPT);
-    cout << "Simulating a purchase..." << endl << endl;
+    cout <<  endl << "Simulating a purchase..." << endl;
     inventorySimulation(inventory, SEASON_2, PURCHASE_EVENT, "t-shirt", CLOTHING_DEPT);
-    cout << "Simulating a theft..." << endl << endl;
+    cout << endl << "Simulating a theft..." << endl;
     inventorySimulation(inventory, SEASON_3, THEFT_EVENT, "apple", GROCERIES_DEPT);
-    cout << "Here is the updated inventory after the simulated delivery, purchase, and theft..." << endl;
+    cout << endl << "Here is the updated inventory after the simulated delivery, purchase, and theft..." << endl;
     displayInventory(inventory);
 
     // performing test #3, as stated in "testing.txt"
-    cout << "Trying to purchase & steal from a department that has no stock..." << endl << endl;
+    cout << endl << "Trying to purchase & steal from a department that has no stock..." << endl;
     inventorySimulation(inventory, SEASON_2, PURCHASE_EVENT, "t-shirt", CLOTHING_DEPT);
     inventorySimulation(inventory, SEASON_3, THEFT_EVENT, "apple", GROCERIES_DEPT);
-    cout << "Here is the updated inventory after attempting to purchase & steal from a department that has no stock..." << endl;
-    displayInventory(inventory);
 
     // performing test #4, as stated in "testing.txt"
-    cout << "Purchasing from a department that has multiple quantities in stock to ensure that only 1 product is removed..." << endl << endl;
+    cout << endl << "Purchasing from a department that has multiple quantities in stock to ensure that only 1 product is removed..." << endl;
     inventorySimulation(inventory, SEASON_1, PURCHASE_EVENT, "phone", ELECTRONICS_DEPT);
-    cout << "Here is the updated inventory after purchasing from a department that has multiple quantities in stock..." << endl;
+    cout << endl << "Here is the updated inventory after purchasing from a department that has multiple quantities in stock..." << endl;
     displayInventory(inventory);
 
     // performing test #5, as stated in "testing.txt"
-    cout << "Delivering to departments that are out of stock to ensure that they can be replenished if needed..." << endl << endl;
+    cout << endl << "Delivering to departments that are out of stock to ensure that they can be replenished if needed..." << endl;
     inventorySimulation(inventory, SEASON_2, DELIVERY_EVENT, "t-shirt", CLOTHING_DEPT);
     inventorySimulation(inventory, SEASON_3, DELIVERY_EVENT, "apple", GROCERIES_DEPT);
-    cout << "Here is the updated inventory after the delivery to out of stock departments..." << endl;
+    cout << endl << "Here is the updated inventory after the delivery to out of stock departments..." << endl;
     displayInventory(inventory);
 
     // testing 3rd function, bool checkUpdateInventoryStock, on its own
     // performing test #3 and test #4, as stated in "testing.txt"
     list<string> groceriesTest = { "apple", "apple", "banana", "orange" }; // creating a sample std::list to work with for purposes of unit testing
+
+    cout << endl << "Testing helper function..." << endl;
+    cout << endl << "Here is the department (std::list) before purchasing/stealing an apple:" << endl;
+    for (string product : groceriesTest) // range-based for loop to traverse through the list
+        cout << product << " ";
+    
+    cout << endl;
+
     bool test = checkUpdateInventoryStock(groceriesTest, "apple"); // create a bool, since it is a bool function
     if (test) // if product was found in list
-        cout << "apple was purchased." << endl;
+        cout << endl << "apple was purchased/stolen." << endl;
     else // if product was not found in list
         cout << "apple not in stock." << endl;
     
-    cout << "Here is the updated department (std::list) after purchasing an apple. Only one should be purchased/removed..." << endl << endl;
+    cout << endl << "Here is the updated department (std::list) after purchasing/stealing an apple. Only one should be purchased or stolen/removed..." << endl;
     for (string product : groceriesTest) // range-based for loop to traverse through the list
         cout << product << " ";
     
