@@ -1,6 +1,6 @@
 // include my program header here
-// COMSC-210 | Lab 29 | Mira Anand
-// Module 11, Lesson: Software Development Life Cycle, Assignment: Project Proposal, Pseudocode, & Mockup
+// COMSC-210 | Lab 30 | Mira Anand
+// Module 11, Lesson: Software Development Life Cycle, Assignment: Alpha Release
 // IDE used: Visual Studio Code for Mac
 
 // Add a comment ("meets requirement") next to lines of code that meet the requirements listed in the "Requirements Analysis"
@@ -8,6 +8,7 @@
 // All changes to the program will happen in this file "Lab29MiraAnand.cpp", but different branches will be utilized
 // To see the original pseudocode from start to finish, please see these GitHub commits in the "main" branch: "Initial commit - Starting pseudocode" to "Commit - end of pseudocode. Final edits were made"
 // To see the original mockup/wireframe code from start to finish, please see these GitHub commits in the "main" branch: "Commit - Starting mockup/wireframe code" to "Commit - End of mockup/wireframe code. Final edits were made"
+// To see the original Alpha Release code from start to finish, please see these GitHub commits in the "alpha" branch: "Commit - Starting Alpha Release" to "Commit - end of Alpha Release. Final edits were made"
 // For mockup/wireframe code, not all pseudocode comments will have code to go with it yet. I want to establish a basic structure first
 
 // Creation of a retail store inventory simulation (in life) - meets requirement
