@@ -17,6 +17,7 @@
 #include <array> // to use std::array
 #include <cstdlib> // for randomization
 #include <ctime> // for randomization
+#include <fstream> // for file operations
 #include <iostream>
 #include <list> // to use std::list
 #include <map> // to use std::map
@@ -25,10 +26,15 @@ using namespace std;
 
 // declaration and initialization of global const variables
 // these variables will be used to assist with randomization in main()
+// for department index
+const int ELECTRONICS_DEPT_INDEX = 0; // accessed by [0] in array of std::lists
+const int CLOTHING_DEPT_INDEX = 1; // accessed by [1] in array of std::lists
+const int GROCERIES_DEPT_INDEX = 2; // accessed by [2] in array of std::lists
+
 // for department name
-const string ELECTRONICS_DEPT = "electronics"; 
-const string CLOTHING_DEPT = "clothing"; 
-const string GROCERIES_DEPT = "groceries"; 
+const string ELECTRONICS_DEPT_NAME = "electronics"; 
+const string CLOTHING_DEPT_NAME = "clothing"; 
+const string GROCERIES_DEPT_NAME = "groceries"; 
 
 // for event type
 const string DELIVERY_EVENT = "delivery";
@@ -66,17 +72,49 @@ int main()
     string product; // to hold product name
 
     // input file reading code block - meets requirement
+    //  - will check for & report any errors when opening the input file. Program will not proceed unless input file is successfully opened
+    //  - for each line in the input file, extract the key (season) and the product name
+    // - insert the product into its corresponding list (electronics, clothing, groceries) in the array for their season
     // in my project/design proposal, I originally stated that I would have the season, department, & product name on 1 line, separated by commas
     // I am deciding to change this format, just to make reading from the input file easier
-    // each season, department, and product name 
-    // my input file "inventory.txt" is also meant to be used in conjunction with this Alpha Release. It only contains 36 lines of input
-    // I will create another .txt file later for my formal program that contains the required 100 lines of input
+    // each season, department, and product name will now have its own line in the input file, in that order. No spaces, department name is case sensitive
+    // my input file "inventory.txt" used for my driver program is also meant to be used in conjunction with this Alpha Release. It only contains 36 lines of input, which is a good amount of model data to work with for this release
+    // I will create another .txt file later for my beta program that contains the required 100 lines of input
     // note: the input file should be structured exactly the way I have it in order for the program to operate successfully. Please open "inventory.txt" to see exact structure
-    // will check for & report any errors when opening the input file. Program will not proceed unless input file is successfully opened
-    // for each line in the input file, extract the key (season) and the product name
-    // insert the product into its corresponding list (electronics, clothing, groceries) in the array for their season
+    // I am taking my input file reading code block from the driver program (testing.cpp) that I created
+    // to see my progression while coding this block, please see my commits that relate to my driver program within the "alpha branch"
 
-    // after manually initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
+    ifstream inputFile("inventory.txt"); // creating an ifstream object to open the input file
+    if (!inputFile) // if the input file does not open
+    {
+        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location and try running the program again." << endl;
+        cout << "Program will now exit..." << endl;
+        return 1; // exit and return an error state
+    }
+
+    while (getline(inputFile, season)) // as long as the season is being read from the input file
+    {
+        // break out of the loop if the department or product cannot be read
+        if (!getline(inputFile, department)) break;
+        if (!getline(inputFile, product)) break;
+
+        if (department == ELECTRONICS_DEPT_NAME) // if the department name is electronics
+        {
+            inventory[season][ELECTRONICS_DEPT_INDEX].push_back(product); // add the product to the end of the list, according to its season and associated index
+        }
+        else if (department == CLOTHING_DEPT_NAME) // if the department name is clothing
+        {
+            inventory[season][CLOTHING_DEPT_INDEX].push_back(product); // add the product to the end of the list, according to its season and associated index
+        }
+        else if (department == GROCERIES_DEPT_NAME) // if the department name is groceries
+        {
+            inventory[season][GROCERIES_DEPT_INDEX].push_back(product); // add the product to the end of the list, according to its season and associated index
+        }
+    }
+
+    inputFile.close(); // close the input file after reading
+
+    // after initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
     cout << "Starting/Initial inventory:" << endl;
     displayInventory(inventory); // displayInventory() function call, to display the current inventory
