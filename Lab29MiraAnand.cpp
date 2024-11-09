@@ -143,13 +143,24 @@ int main()
             string randomDepartment = departments[randomDepartmentIndex]; // access department name
             // random event
             string randomEvent = events[rand() % 3]; // choose from the events array we created
+
+            // choose a random product from the department that was randomly chosen
+            list<string> chosenDepartment = inventory[randomSeason][randomDepartmentIndex]; // access the associated std::list
+            // ensure the department is not out of stock (empty) before choosing a product
+            if (chosenDepartment.empty())
+            {
+                cout << "Event attempted, but failed. Entire department is out of stock..." << endl;
+                continue; // do not attempt to choose a random product at this time
+            }
+
+            auto it = chosenDepartment.begin(); // creation of an iterator to traverse the std::list
+            advance(it, rand() % chosenDepartment.size()); // advance the iterator to a random position (product) within the list. .size() used to ensure iterator does not go out of bounds
+            string randomProduct = *it; // de-reference the iterator (*) to access the product name at the iterator
+
+            // call our function that performs the inventory simulation within this second for loop
         }
     }
-            // call our function that performs the inventory simulation within this second for loop
         // within the 1st for loop, call our output function that will display the current inventory for the current time period after the simulation occurs - meets requirement
-
-    // output the current inventory after calling the inventorySimulation() function
-    displayInventory(inventory);
 
     return 0;
 
