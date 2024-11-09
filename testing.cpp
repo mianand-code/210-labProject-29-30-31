@@ -2,39 +2,34 @@
 // Module 11, Lesson: Software Development Life Cycle, Assignment: Alpha Release
 // IDE used: Visual Studio Code for Mac
 
+// Creating a separate .cpp file named "testing.cpp" to track 10 minute commits when writing my short driver program for unit testing
+// When I finish, this program will still be pasted below my testing description write-up in my "testing.txt" file
+// To see the driver program code from start to finish, please see these GitHub commits in the "alpha" branch: "Commit - Starting driver program" to "Commit - End of driver program. Final edits were made"
+// I will be starting with my pseudocode + mockup/wireframe code and I will revise it to create the driver program
+
 // Add a comment ("meets requirement") next to lines of code that meet the requirements listed in the "Requirements Analysis"
+// As the project develops, more detailed comments will be added to the program + pseudocode comments may be removed/modified as needed
+// Not all pseudocode comments will have code to go with it yet. I want to establish a basic structure first
+
 // Creation of a retail store inventory simulation (in life) - meets requirement
-// As the project develops, more detailed comments will be added to the program (especially in the Beta Release) + pseudocode comments may be removed/modified as needed
-// All changes to the program will happen in this file "Lab29MiraAnand.cpp", but different branches will be utilized
-// To see the original pseudocode from start to finish, please see these GitHub commits in the "main" branch: "Initial commit - Starting pseudocode" to "Commit - end of pseudocode. Final edits were made"
-// To see the original mockup/wireframe code from start to finish, please see these GitHub commits in the "main" branch: "Commit - Starting mockup/wireframe code" to "Commit - End of mockup/wireframe code. Final edits were made"
-// To see the original Alpha Release code from start to finish, please see these GitHub commits in the "alpha" branch: "Commit - Starting Alpha Release" to "Commit - end of Alpha Release. Final edits were made"
 
-// My Alpha Release will focus on implementing the randomization component of my simulation
-// The point of this release is to make sure randomization is implemented and is functioning correctly
-// # of events, event type, season, department, and product will all be randomized in my Alpha Release
-
+// include the necessary headers here
 #include <array> // to use std::array
-#include <cstdlib> // for randomization
-#include <ctime> // for randomization
+#include <cstdlib> // for randomization - not using this yet 
+#include <ctime> // for randomization - not using this yet
 #include <fstream> // for file operations
 #include <iostream>
 #include <list> // to use std::list
 #include <map> // to use std::map
 #include <string>
+// define namespace (using namespace std;) after including the headers
 using namespace std;
 
-// declaration and initialization of global const variables
-// these variables will be used to assist with randomization in main()
-// for department index
-const int ELECTRONICS_DEPT_INDEX = 0; // accessed by [0] in array of std::lists
-const int CLOTHING_DEPT_INDEX = 1; // accessed by [1] in array of std::lists
-const int GROCERIES_DEPT_INDEX = 2; // accessed by [2] in array of std::lists
-
+// declaration and initialization of global const variables (for driver program purposes as of now)
 // for department name
-const string ELECTRONICS_DEPT_NAME = "electronics"; 
-const string CLOTHING_DEPT_NAME = "clothing"; 
-const string GROCERIES_DEPT_NAME = "groceries"; 
+const int ELECTRONICS_DEPT = 0; // accessed by [0] in array of std::lists
+const int CLOTHING_DEPT = 1; // accessed by [1] in array of std::lists
+const int GROCERIES_DEPT = 2; // accessed by [2] in array of std::lists
 
 // for event type
 const string DELIVERY_EVENT = "delivery";
@@ -48,6 +43,7 @@ const string SEASON_3 = "Fall";
 const string SEASON_4 = "Winter";
 
 // function prototypes
+// 3 functions:
 // 1. to output the contents of the inventory - initially (after input file reading) and then after each time period occurs
 void displayInventory(const map<string, array<list<string>, 3>> inventory);
 // 2. to perform the actual inventory simulation (when inventory-related events occur)
@@ -55,40 +51,34 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string,
 // 3. a helper function to assist the inventory simulation function (so the inventory simulation function isn't too complex/cluttered)
 bool checkUpdateInventoryStock(list<string>&, string);
 
+// int main() function starts here
+// driver program for unit testing starts here
 int main()
 {
-    srand(time(0)); // srand(time(0)); needed as first line in main() for randomization - so inventory simulation is more realistic
-
-    // creation of the foundational data structure - meets requirement
-    // - creation of an std::map named "inventory"
-    // - the key is a string variable that represents a season: Spring, Summer, Fall, Winter
-    // - the value is an std::array of 3 std::lists. These std::lists represent different store departments: electronics, clothing, groceries
-    // - string values that represent product names will be held within each of these std::lists
-    map<string, array<list<string>, 3>> inventory;
+    // srand(time(0)); needed as first line in main() for randomization - so inventory simulation is more realistic
+    srand(time(0));
 
     // declaration of variables that will be used to read/hold data from the input file
     string season; // to hold season name
     string department; // to hold department name
     string product; // to hold product name
 
-    // declaration and initialization of arrays that will assist with selecting random events, seasons, and departments
-    const string events[] = {DELIVERY_EVENT, PURCHASE_EVENT, THEFT_EVENT}; // for events
-    const string seasons[] = {SEASON_1, SEASON_2, SEASON_3, SEASON_4}; // for seasons
-    const string departments[] {ELECTRONICS_DEPT_NAME, CLOTHING_DEPT_NAME, GROCERIES_DEPT_NAME}; // for departments
+    // creation of the foundational data structure - meets requirement
+    // this is the data structure I will be using - map<string, array<list<string>, 3>> inventory;
+    // - creation of an std::map named "inventory"
+    // - the key is a string variable that represents a season: Spring, Summer, Fall, Winter
+    // - the value is an std::array of 3 std::lists. These std::lists represent different store departments: electronics, clothing, groceries
+    // - string values that represent product names will be held within each of these std::lists
+    map<string, array<list<string>, 3>> inventory;
 
     // input file reading code block - meets requirement
-    // - will check for & report any errors when opening the input file. Program will not proceed unless input file is successfully opened
-    // - for each line in the input file, extract the key (season) and the product name
-    // - insert the product into its corresponding list (electronics, clothing, groceries) in the array for their season
-    // in my project/design proposal, I originally stated that I would have the season, department, & product name on 1 line in the input file, separated by commas
-    // I am deciding to change this format, just to make reading from the input file easier
-    // each season, department, and product name will now have its own line in the input file, in that order. No spaces allowed, department name is case sensitive
-    // the input file I am using is named "inventoryFinal.txt" and it contains more than 100 lines of input - meets requirement
-    // note: the input file should be structured exactly the way I have it in order for the program to operate successfully. Please open "inventoryFinal.txt" to see exact structure
-    // I am copying my input file reading code block from the driver program (testing.cpp) that I created
-    // to see my progression while coding this block, please see my commits that relate to my driver program within the "alpha" branch
-
-    ifstream inputFile("inventoryFinal.txt"); // creating an ifstream object to open the input file
+    // for our driver program, my input file (inventory.txt) only contains 36 lines of input for unit testing purposes. I will create another .txt file later for my formal program that contains the required 100 lines of input
+    // "inventory.txt" is only meant to be used in conjunction with this driver program
+    // note: the input file should be structured exactly the way I have it in order for the program to operate successfully. Please open "inventory.txt" to see exact structure
+    // will check for & report any errors when opening the input file. Program will not proceed unless input file is successfully opened
+    // for each line in the input file, extract the key (season) and the product name
+    // insert the product into its corresponding list (electronics, clothing, groceries) in the array for their season
+    ifstream inputFile("inventory.txt"); // creating an ifstream object to open the input file
     if (!inputFile) // if the input file does not open
     {
         cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location and try running the program again." << endl;
@@ -96,23 +86,25 @@ int main()
         return 1; // exit and return an error state
     }
 
+    cout << "Input file successfully opened. Now reading data..." << endl << endl; // to test input file functionality, part of test #1 as stated in "testing.txt"
+
     while (getline(inputFile, season)) // as long as the season is being read from the input file
     {
         // break out of the loop if the department or product cannot be read
         if (!getline(inputFile, department)) break;
         if (!getline(inputFile, product)) break;
 
-        if (department == ELECTRONICS_DEPT_NAME) // if the department name is electronics
+        if (department == "electronics") // if the department name is electronics
         {
-            inventory[season][ELECTRONICS_DEPT_INDEX].push_back(product); // add the product to the end of the list, according to its season and associated index
+            inventory[season][ELECTRONICS_DEPT].push_back(product); // add the product to the end of the list, according to its season and associated index
         }
-        else if (department == CLOTHING_DEPT_NAME) // if the department name is clothing
+        else if (department == "clothing") // if the department name is clothing
         {
-            inventory[season][CLOTHING_DEPT_INDEX].push_back(product); // add the product to the end of the list, according to its season and associated index
+            inventory[season][CLOTHING_DEPT].push_back(product); // add the product to the end of the list, according to its season and associated index
         }
-        else if (department == GROCERIES_DEPT_NAME) // if the department name is groceries
+        else if (department == "groceries") // if the department name is groceries
         {
-            inventory[season][GROCERIES_DEPT_INDEX].push_back(product); // add the product to the end of the list, according to its season and associated index
+            inventory[season][GROCERIES_DEPT].push_back(product); // add the product to the end of the list, according to its season and associated index
         }
     }
 
@@ -120,52 +112,83 @@ int main()
 
     // after initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
-    cout << "*** Starting/Initial inventory ***" << endl;
+    // performing test #1, as stated in "testing.txt"
+    cout << "Testing if the input file data was correctly read & if the inventory has been correctly initialized..." << endl;
     displayInventory(inventory); // displayInventory() function call, to display the current inventory
 
     // create a for loop to perform the inventory simulation over 25 time periods (which represent days) - meets requirement
-    // for my Alpha Release, I will start off with 5 time periods (instead of 25) just to approximate functionality - to make sure time periods run and randomization works
-    for (int days = 1; days <= 5; days++)
-    {
-        cout << endl << "*** Day #" << days << " ***" << endl;
-
         // within the for loop, we need to randomly select a # of inventory-related events to occur
-        int randomEventNum = rand() % 3 + 1; // choosing a random # of events between 1-3
-
-        // based on this # of random events (create another for loop), we need to randomly select a season, department, product, and type of inventory-related event to occur
-        for (int i = 0; i < randomEventNum; i++)
-        {
-            // random season
-            string randomSeason = seasons[rand() % 4]; // choose from the seasons array we created
-            // random department - choose a random department index and associate it with a name
-            int randomDepartmentIndex = rand() % 3; // 0-2 index
-            string randomDepartment = departments[randomDepartmentIndex]; // access department name
-            // random event
-            string randomEvent = events[rand() % 3]; // choose from the events array we created
-
-            // ***** I am having an issue with this part of my code (selecting random product). I will debug it when I start coding my Beta Release, since the Alpha Release does not need to be perfect yet
-            // ***** the issue is that if the list/department is empty, product cannot be re-delivered to out of stock departments since there is no product to choose from
-            
-            // choose a random product from the department that was randomly chosen
-            list<string> chosenDepartment = inventory[randomSeason][randomDepartmentIndex]; // access the associated std::list
-
-            auto it = chosenDepartment.begin(); // creation of an iterator to traverse the std::list
-            advance(it, rand() % chosenDepartment.size()); // advance the iterator to a random position (product) within the list. .size() used to ensure iterator does not go out of bounds
-            string randomProduct = *it; // de-reference the iterator (*) to access the product name at the iterator
-            
-            // ***** issue ends
-
+            // based on this # of random events (create another for loop), we need to randomly select a season, department, and type of inventory-related event to occur 
             // call our function that performs the inventory simulation within this second for loop
-            inventorySimulation(inventory, randomSeason, randomEvent, randomProduct, randomDepartmentIndex);
-        }
-
         // within the 1st for loop, call our output function that will display the current inventory for the current time period after the simulation occurs - meets requirement
-        // output the current inventory after calling the inventorySimulation() function
-        displayInventory(inventory);
-    }
 
-    return 0;
-}
+    // when performing tests for void inventorySimulation() & bool checkUpdateInventoryStock(), the function parameters (when calling the functions) will be hardcoded/not chosen randomly
+    // the reason for this is so have direct control of the functions/situations we are unit testing
+    // performing test #2 and test #6, as stated in "testing.txt"
+    cout << endl;
+    cout << "Simulating a delivery + testing to make sure that a duplicate product being delivered is shown twice to indicate multiple quantities..." << endl;
+    inventorySimulation(inventory, SEASON_1, DELIVERY_EVENT, "phone", ELECTRONICS_DEPT);
+    cout <<  endl << "Simulating a purchase..." << endl;
+    inventorySimulation(inventory, SEASON_2, PURCHASE_EVENT, "t-shirt", CLOTHING_DEPT);
+    cout << endl << "Simulating a theft..." << endl;
+    inventorySimulation(inventory, SEASON_3, THEFT_EVENT, "apple", GROCERIES_DEPT);
+    cout << endl << "Here is the updated inventory after the simulated delivery, purchase, and theft..." << endl;
+    displayInventory(inventory);
+
+    // performing test #3, as stated in "testing.txt"
+    cout << endl << "Trying to purchase & steal from a department that has no stock..." << endl;
+    inventorySimulation(inventory, SEASON_2, PURCHASE_EVENT, "t-shirt", CLOTHING_DEPT);
+    inventorySimulation(inventory, SEASON_3, THEFT_EVENT, "apple", GROCERIES_DEPT);
+
+    // performing test #4, as stated in "testing.txt"
+    cout << endl << "Purchasing from a department that has multiple quantities in stock to ensure that only 1 product is removed..." << endl;
+    inventorySimulation(inventory, SEASON_1, PURCHASE_EVENT, "phone", ELECTRONICS_DEPT);
+    cout << endl << "Here is the updated inventory after purchasing from a department that has multiple quantities in stock..." << endl;
+    displayInventory(inventory);
+
+    // performing test #5, as stated in "testing.txt"
+    cout << endl << "Delivering to departments that are out of stock to ensure that they can be replenished if needed..." << endl;
+    inventorySimulation(inventory, SEASON_2, DELIVERY_EVENT, "t-shirt", CLOTHING_DEPT);
+    inventorySimulation(inventory, SEASON_3, DELIVERY_EVENT, "apple", GROCERIES_DEPT);
+    cout << endl << "Here is the updated inventory after delivering to out of stock departments..." << endl;
+    displayInventory(inventory);
+
+    // testing 3rd function, bool checkUpdateInventoryStock(), on its own
+    // performing test #4, as stated in "testing.txt"
+    list<string> groceriesTest = { "apple", "apple", "banana", "orange" }; // creating a sample std::list to work with for purposes of unit testing
+
+    cout << endl << "Testing helper function (on its own)..." << endl;
+    cout << endl << "Here is the department (std::list) before purchasing/stealing an apple:" << endl;
+    for (string product : groceriesTest) // range-based for loop to traverse through the list
+        cout << product << " ";
+    
+    cout << endl;
+
+    bool test = checkUpdateInventoryStock(groceriesTest, "apple"); // create a bool and call the function. True or false will be stored in our created bool
+    if (test) // if product was found in list
+        cout << endl << "event - apple was purchased/stolen." << endl;
+    else // if product was not found in list
+        cout << "result - apple not in stock." << endl;
+    
+    cout << endl << "Here is the updated department (std::list) after purchasing/stealing an apple. Only one should be purchased or stolen/removed..." << endl;
+    for (string product : groceriesTest) // range-based for loop to traverse through the list
+        cout << product << " ";
+    
+    cout << endl;
+
+    // performing test #3, as stated in "testing.txt"
+    cout << endl << "Testing helper function (on its own) again..." << endl;
+    cout << endl << "Attempting to purchase/steal milk, which is not in stock..." << endl;
+        bool test1 = checkUpdateInventoryStock(groceriesTest, "milk"); // create a bool and call the function. True or false will be stored in our created bool
+    if (test1) // if product was found in list
+        cout << endl << "event - milk was purchased/stolen." << endl;
+    else // if product was not found in list
+        cout << "result - milk not in stock." << endl;
+
+    return 0; // make sure to add return 0; at the end of main()
+
+} // int main() function ends here
+// driver program for unit testing ends here
 
 // make sure to include function header comments here
 // void displayInventory(const map<string, array<list<string>, 3>> inventory) function header
@@ -187,17 +210,17 @@ void displayInventory(const map<string, array<list<string>, 3>> inventory)
         {
             string name; // to hold the name of a department
             // associate each department name with an index
-            if (d == ELECTRONICS_DEPT_INDEX) 
+            if (d == 0) 
             {
-                name = ELECTRONICS_DEPT_NAME;
+                name = "electronics";
             }
-            else if (d == CLOTHING_DEPT_INDEX)
+            else if (d == 1)
             {
-                name = CLOTHING_DEPT_NAME;
+                name = "clothing";
             }
             else
             {
-                name = GROCERIES_DEPT_NAME;
+                name = "groceries";
             }
 
             cout <<  "    Department - " << name << ": "; // output the name of the department
@@ -238,17 +261,17 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
     // write code (similar to/same as the code in the output function) that associates a department with an index #
     string name; // to hold the name of a department
     // associate each department name with an index
-    if (department == ELECTRONICS_DEPT_INDEX) 
+    if (department == 0) 
     {
-        name = ELECTRONICS_DEPT_NAME;
+        name = "electronics";
     }
-    else if (department == CLOTHING_DEPT_INDEX)
+    else if (department == 1)
     {
-        name = CLOTHING_DEPT_NAME;
+        name = "clothing";
     }
     else
     {
-        name = GROCERIES_DEPT_NAME;
+        name = "groceries";
     }
 
     // output the event data - display that an event is happening, along with its associated season, type of event, department, and product name
@@ -258,12 +281,12 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
     // now that an event has occurred, we have to update the inventory accordingly
     // write code to update the inventory. Inventory will be updated based on any of the 3 event types
     // our helper function will be utilized here to ensure that a purchase or theft cannot happen if a department has no products (is out of stock)
-        if (event == DELIVERY_EVENT) // if a delivery event occurs
+        if (event == "delivery") // if a delivery event occurs
         {
             inventory[season][department].push_back(product); // add the product delivered to the end of the list (for that specific season + department)
             cout <<  "    Updating inventory to reflect delivery..." << endl;
         }
-        else if (event == PURCHASE_EVENT || event == THEFT_EVENT) // if a purchase or theft event occurs (which requires removal of a product from inventory)
+        else if (event == "purchase" || event == "theft") // if a purchase or theft event occurs (which requires removal of a product from inventory)
         {
             // call our helper function here, checkUpdateInventoryStock()
             // this will check if a department (during a certain season) has a product in stock before it removes it
@@ -274,7 +297,7 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
                 // if department has stock
                 // displays message based on event type
                 cout <<  "    Updating inventory to reflect ";
-                if (event == PURCHASE_EVENT)
+                if (event == "purchase")
                     cout << "purchase..." << endl;
                 else
                     cout << "theft..." << endl;
@@ -284,7 +307,7 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
                 // if department has no stock
                 // displays message based on event type
                 cout <<  "    No stock to ";
-                if (event == PURCHASE_EVENT)
+                if (event == "purchase")
                     cout << "purchase." << endl;
                 else
                     cout << "steal." << endl;
