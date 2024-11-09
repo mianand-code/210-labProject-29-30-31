@@ -4,7 +4,7 @@
 
 // Add a comment ("meets requirement") next to lines of code that meet the requirements listed in the "Requirements Analysis"
 // Creation of a retail store inventory simulation (in life) - meets requirement
-// As the project develops, more detailed comments will be added to the program + pseudocode comments may be removed/modified as needed
+// As the project develops, more detailed comments will be added to the program (especially in the Beta Release) + pseudocode comments may be removed/modified as needed
 // All changes to the program will happen in this file "Lab29MiraAnand.cpp", but different branches will be utilized
 // To see the original pseudocode from start to finish, please see these GitHub commits in the "main" branch: "Initial commit - Starting pseudocode" to "Commit - end of pseudocode. Final edits were made"
 // To see the original mockup/wireframe code from start to finish, please see these GitHub commits in the "main" branch: "Commit - Starting mockup/wireframe code" to "Commit - End of mockup/wireframe code. Final edits were made"
@@ -77,19 +77,18 @@ int main()
     const string departments[] {ELECTRONICS_DEPT_NAME, CLOTHING_DEPT_NAME, GROCERIES_DEPT_NAME}; // for departments
 
     // input file reading code block - meets requirement
-    //  - will check for & report any errors when opening the input file. Program will not proceed unless input file is successfully opened
-    //  - for each line in the input file, extract the key (season) and the product name
+    // - will check for & report any errors when opening the input file. Program will not proceed unless input file is successfully opened
+    // - for each line in the input file, extract the key (season) and the product name
     // - insert the product into its corresponding list (electronics, clothing, groceries) in the array for their season
-    // in my project/design proposal, I originally stated that I would have the season, department, & product name on 1 line, separated by commas
+    // in my project/design proposal, I originally stated that I would have the season, department, & product name on 1 line in the input file, separated by commas
     // I am deciding to change this format, just to make reading from the input file easier
-    // each season, department, and product name will now have its own line in the input file, in that order. No spaces, department name is case sensitive
-    // my input file "inventory.txt" used for my driver program is also meant to be used in conjunction with this Alpha Release. It only contains 36 lines of input, which is a good amount of model data to work with for this release
-    // I will create another .txt file later for my Beta Release that contains the required 100 lines of input
-    // note: the input file should be structured exactly the way I have it in order for the program to operate successfully. Please open "inventory.txt" to see exact structure
-    // I am taking my input file reading code block from the driver program (testing.cpp) that I created
+    // each season, department, and product name will now have its own line in the input file, in that order. No spaces allowed, department name is case sensitive
+    // the input file I am using is named "inventoryFinal.txt" and it contains more than 100 lines of input - meets requirement
+    // note: the input file should be structured exactly the way I have it in order for the program to operate successfully. Please open "inventoryFinal.txt" to see exact structure
+    // I am copying my input file reading code block from the driver program (testing.cpp) that I created
     // to see my progression while coding this block, please see my commits that relate to my driver program within the "alpha" branch
 
-    ifstream inputFile("inventory.txt"); // creating an ifstream object to open the input file
+    ifstream inputFile("inventoryFinal.txt"); // creating an ifstream object to open the input file
     if (!inputFile) // if the input file does not open
     {
         cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location and try running the program again." << endl;
@@ -121,7 +120,7 @@ int main()
 
     // after initializing the inventory, we need to display the initial state of the inventory (environment) - meets requirement
     // we will call our output function to accomplish this
-    cout << "Starting/Initial inventory:" << endl;
+    cout << "*** Starting/Initial inventory ***" << endl;
     displayInventory(inventory); // displayInventory() function call, to display the current inventory
 
     // create a for loop to perform the inventory simulation over 25 time periods (which represent days) - meets requirement
@@ -144,18 +143,17 @@ int main()
             // random event
             string randomEvent = events[rand() % 3]; // choose from the events array we created
 
+            // ***** I am having an issue with this part of my code (selecting random product). I will debug it when I start coding my Beta Release, since the Alpha Release does not need to be perfect yet
+            // ***** the issue is that if the list/department is empty, product cannot be re-delivered to out of stock departments since there is no product to choose from
+            
             // choose a random product from the department that was randomly chosen
             list<string> chosenDepartment = inventory[randomSeason][randomDepartmentIndex]; // access the associated std::list
-            // ensure the department is not out of stock (empty) before choosing a product
-            if (chosenDepartment.empty())
-            {
-                cout << "    Event attempted, but failed. Entire department is out of stock..." << endl;
-                continue; // do not attempt to choose a random product at this time
-            }
 
             auto it = chosenDepartment.begin(); // creation of an iterator to traverse the std::list
             advance(it, rand() % chosenDepartment.size()); // advance the iterator to a random position (product) within the list. .size() used to ensure iterator does not go out of bounds
             string randomProduct = *it; // de-reference the iterator (*) to access the product name at the iterator
+            
+            // ***** issue ends
 
             // call our function that performs the inventory simulation within this second for loop
             inventorySimulation(inventory, randomSeason, randomEvent, randomProduct, randomDepartmentIndex);
@@ -189,17 +187,17 @@ void displayInventory(const map<string, array<list<string>, 3>> inventory)
         {
             string name; // to hold the name of a department
             // associate each department name with an index
-            if (d == 0) 
+            if (d == ELECTRONICS_DEPT_INDEX) 
             {
-                name = "electronics";
+                name = ELECTRONICS_DEPT_NAME;
             }
-            else if (d == 1)
+            else if (d == CLOTHING_DEPT_INDEX)
             {
-                name = "clothing";
+                name = CLOTHING_DEPT_NAME;
             }
             else
             {
-                name = "groceries";
+                name = GROCERIES_DEPT_NAME;
             }
 
             cout <<  "    Department - " << name << ": "; // output the name of the department
@@ -240,17 +238,17 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
     // write code (similar to/same as the code in the output function) that associates a department with an index #
     string name; // to hold the name of a department
     // associate each department name with an index
-    if (department == 0) 
+    if (department == ELECTRONICS_DEPT_INDEX) 
     {
-        name = "electronics";
+        name = ELECTRONICS_DEPT_NAME;
     }
-    else if (department == 1)
+    else if (department == CLOTHING_DEPT_INDEX)
     {
-        name = "clothing";
+        name = CLOTHING_DEPT_NAME;
     }
     else
     {
-        name = "groceries";
+        name = GROCERIES_DEPT_NAME;
     }
 
     // output the event data - display that an event is happening, along with its associated season, type of event, department, and product name
@@ -260,12 +258,12 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
     // now that an event has occurred, we have to update the inventory accordingly
     // write code to update the inventory. Inventory will be updated based on any of the 3 event types
     // our helper function will be utilized here to ensure that a purchase or theft cannot happen if a department has no products (is out of stock)
-        if (event == "delivery") // if a delivery event occurs
+        if (event == DELIVERY_EVENT) // if a delivery event occurs
         {
             inventory[season][department].push_back(product); // add the product delivered to the end of the list (for that specific season + department)
             cout <<  "    Updating inventory to reflect delivery..." << endl;
         }
-        else if (event == "purchase" || event == "theft") // if a purchase or theft event occurs (which requires removal of a product from inventory)
+        else if (event == PURCHASE_EVENT || event == THEFT_EVENT) // if a purchase or theft event occurs (which requires removal of a product from inventory)
         {
             // call our helper function here, checkUpdateInventoryStock()
             // this will check if a department (during a certain season) has a product in stock before it removes it
@@ -276,7 +274,7 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
                 // if department has stock
                 // displays message based on event type
                 cout <<  "    Updating inventory to reflect ";
-                if (event == "purchase")
+                if (event == PURCHASE_EVENT)
                     cout << "purchase..." << endl;
                 else
                     cout << "theft..." << endl;
@@ -286,7 +284,7 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
                 // if department has no stock
                 // displays message based on event type
                 cout <<  "    No stock to ";
-                if (event == "purchase")
+                if (event == PURCHASE_EVENT)
                     cout << "purchase." << endl;
                 else
                     cout << "steal." << endl;
