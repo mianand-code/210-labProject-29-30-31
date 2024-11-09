@@ -128,7 +128,7 @@ int main()
     // for my Alpha Release, I will start off with 5 time periods (instead of 25) just to approximate functionality - to make sure time periods run and randomization works
     for (int days = 1; days <= 5; days++)
     {
-        cout << "*** Day #" << days << " ***" << endl;
+        cout << endl << "*** Day #" << days << " ***" << endl;
 
         // within the for loop, we need to randomly select a # of inventory-related events to occur
         int randomEventNum = rand() % 3 + 1; // choosing a random # of events between 1-3
@@ -149,7 +149,7 @@ int main()
             // ensure the department is not out of stock (empty) before choosing a product
             if (chosenDepartment.empty())
             {
-                cout << "Event attempted, but failed. Entire department is out of stock..." << endl;
+                cout << "    Event attempted, but failed. Entire department is out of stock..." << endl;
                 continue; // do not attempt to choose a random product at this time
             }
 
@@ -158,12 +158,15 @@ int main()
             string randomProduct = *it; // de-reference the iterator (*) to access the product name at the iterator
 
             // call our function that performs the inventory simulation within this second for loop
+            inventorySimulation(inventory, randomSeason, randomEvent, randomProduct, randomDepartmentIndex);
         }
-    }
+
         // within the 1st for loop, call our output function that will display the current inventory for the current time period after the simulation occurs - meets requirement
+        // output the current inventory after calling the inventorySimulation() function
+        displayInventory(inventory);
+    }
 
     return 0;
-
 }
 
 // make sure to include function header comments here
