@@ -1,0 +1,5 @@
+// COMSC-210 | Lab 31 | Mira Anand
+// Module 11, Lesson: Software Development Life Cycle, Assignment: Beta Release
+// IDE used: Visual Studio Code for Mac
+
+// All commits for this .txt file can be found in the “beta” branch

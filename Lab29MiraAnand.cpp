@@ -1,5 +1,5 @@
-// COMSC-210 | Lab 30 | Mira Anand
-// Module 11, Lesson: Software Development Life Cycle, Assignment: Alpha Release
+// COMSC-210 | Lab 31 | Mira Anand
+// Module 11, Lesson: Software Development Life Cycle, Assignment: Beta Release
 // IDE used: Visual Studio Code for Mac
 
 // Add a comment ("meets requirement") next to lines of code that meet the requirements listed in the "Requirements Analysis"
@@ -9,6 +9,7 @@
 // To see the original pseudocode from start to finish, please see these GitHub commits in the "main" branch: "Initial commit - Starting pseudocode" to "Commit - end of pseudocode. Final edits were made"
 // To see the original mockup/wireframe code from start to finish, please see these GitHub commits in the "main" branch: "Commit - Starting mockup/wireframe code" to "Commit - End of mockup/wireframe code. Final edits were made"
 // To see the original Alpha Release code from start to finish, please see these GitHub commits in the "alpha" branch: "Commit - Starting Alpha Release" to "Commit - end of Alpha Release. Final edits were made"
+// To see progression of Beta Release and "bugs.txt", please see all GitHub commits in the "beta" branch
 
 // My Alpha Release will focus on implementing the randomization component of my simulation
 // The point of this release is to make sure randomization is implemented and is functioning correctly
