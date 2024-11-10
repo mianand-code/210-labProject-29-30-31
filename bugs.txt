@@ -19,3 +19,7 @@ Please see line #'s 148-152.
 #3 - I realized that I need to perform a check in my program that checks if departments (std::lists) are empty or not. This was not implemented at all in my coding logic. 
 I fixed this by implementing the check in my main() function (as an if statement) and it was also implemented as part of my fix for entry #2. 
 Please see line #146.
+
+#4 - I needed to update the code block that deals with selecting a random product from a department that does have existing stock. 
+I fixed this by putting the existing code in an “else” statement that goes along with my “if” statement from entry #3.
+Please see line #'s 154-162.

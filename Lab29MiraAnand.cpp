@@ -147,17 +147,19 @@ int main()
             {
                 if (randomEvent == DELIVERY_EVENT) // if a delivery event is triggered when the department/list is completely empty
                 {
-                    inventorySimulation(inventory, randomSeason, DELIVERY_EVENT, REPLENISHMENT_PRODUCT, randomDepartmentIndex); // inventorySimulation() function call, will 
+                    inventorySimulation(inventory, randomSeason, DELIVERY_EVENT, REPLENISHMENT_PRODUCT, randomDepartmentIndex); // inventorySimulation() function call, will deliver the replenishment product to the department
                     cout << "    Replenishment is being delivered since department has no stock..." << endl;
                 }
             }
+            else
+            {
+                auto it = chosenDepartment.begin(); // creation of an iterator to traverse the std::list
+                advance(it, rand() % chosenDepartment.size()); // advance the iterator to a random position (product) within the list. .size() used to ensure iterator does not go out of bounds
+                string randomProduct = *it; // de-reference the iterator (*) to access the product name at the iterator
 
-            auto it = chosenDepartment.begin(); // creation of an iterator to traverse the std::list
-            advance(it, rand() % chosenDepartment.size()); // advance the iterator to a random position (product) within the list. .size() used to ensure iterator does not go out of bounds
-            string randomProduct = *it; // de-reference the iterator (*) to access the product name at the iterator
-
-            // call our function that performs the inventory simulation within this second for loop
-            inventorySimulation(inventory, randomSeason, randomEvent, randomProduct, randomDepartmentIndex);
+                // call our function that performs the inventory simulation within this second for loop
+                inventorySimulation(inventory, randomSeason, randomEvent, randomProduct, randomDepartmentIndex);
+            }
         }
 
         // within the 1st for loop, call our output function that will display the current inventory for the current time period after the simulation occurs - meets requirement
@@ -219,22 +221,14 @@ void displayInventory(const map<string, array<list<string>, 3>> inventory)
     }
 }
 
-// make sure to include function header comments here
 // DESCRIPTION: create a function that performs the actual inventory simulation - meets requirement
-// ARGUMENTS:
-    // this function will include various parameters:
-    // 1. our foundational data structure
-    // 2. the season
-    // 3. the department
-    // 4. the type of inventory-related event
-    // 5. the name of the product
+// ARGUMENTS: 1. const map<string, array<list<string>, 3>> inventory, an std::map in which the key is a string variable that represents a certain season
+// - and the value is an std::array of 3 std::lists, that each hold string values - represents different departments
+// - 2. string season, which represents a certain season
+// - 3. string event, which represents the type of inventory-related event to occur
+// - 4. string product, which represents the name of a certain product
+// - 5. int department, which represents the index # of a certain department
 // RETURNS: nothing, void function
-// points to consider when coding this function:
-    // purchases or thefts should not be allowed when a department has no stock (helper function)
-    // if a product is stolen or purchased, only 1 product should be removed from the inventory if there is multiple stock of the same product (helper function)
-    // products should/can be delivered to departments that have no stock
-    // if a duplicate product is being delivered (to "top off" the inventory), the product's name should show more than once
-    // products delivered to a department should be related/belong to their specific department
 void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string season, string event, string product, int department)
 {
     // write code (similar to/same as the code in the output function) that associates a department with an index #
@@ -294,7 +288,6 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
         }
 }
 
-// make sure to include function header comments here
 // DESCRIPTION: create a helper function that works with the inventory simulation function - meets requirement
 // ARGUMENTS:
     // the parameters for the function should include:
