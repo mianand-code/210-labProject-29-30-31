@@ -3,17 +3,13 @@
 // IDE used: Visual Studio Code for Mac
 
 // Add a comment ("meets requirement") next to lines of code that meet the requirements listed in the "Requirements Analysis"
-// Creation of a retail store inventory simulation (in life) - meets requirement
-// As the project develops, more detailed comments will be added to the program (especially in the Beta Release) + pseudocode comments may be removed/modified as needed
 // All changes to the program will happen in this file "Lab29MiraAnand.cpp", but different branches will be utilized
 // To see the original pseudocode from start to finish, please see these GitHub commits in the "main" branch: "Initial commit - Starting pseudocode" to "Commit - end of pseudocode. Final edits were made"
 // To see the original mockup/wireframe code from start to finish, please see these GitHub commits in the "main" branch: "Commit - Starting mockup/wireframe code" to "Commit - End of mockup/wireframe code. Final edits were made"
 // To see the original Alpha Release code from start to finish, please see these GitHub commits in the "alpha" branch: "Commit - Starting Alpha Release" to "Commit - end of Alpha Release. Final edits were made"
-// To see progression of Beta Release and "bugs.txt", please see all GitHub commits in the "beta" branch
+// To see the progression of Beta Release and "bugs.txt", please see all GitHub commits in the "beta" branch
 
-// My Alpha Release will focus on implementing the randomization component of my simulation
-// The point of this release is to make sure randomization is implemented and is functioning correctly
-// # of events, event type, season, department, and product will all be randomized in my Alpha Release
+// Creation of a retail store inventory simulation (in life) - meets requirement
 
 #include <array> // to use std::array
 #include <cstdlib> // for randomization
@@ -26,7 +22,7 @@
 using namespace std;
 
 // declaration and initialization of global const variables
-// these variables will be used to assist with randomization in main()
+// these variables will be used to assist with randomization in main() + they make reading the code easier and can be easily changed/added to in the future to accomodate any coding updates
 // for department index
 const int ELECTRONICS_DEPT_INDEX = 0; // accessed by [0] in array of std::lists
 const int CLOTHING_DEPT_INDEX = 1; // accessed by [1] in array of std::lists
@@ -58,7 +54,7 @@ bool checkUpdateInventoryStock(list<string>&, string);
 
 int main()
 {
-    srand(time(0)); // srand(time(0)); needed as first line in main() for randomization - so inventory simulation is more realistic
+    srand(time(0)); // needed as the first line in main() for randomization - so the inventory simulation is more realistic
 
     // creation of the foundational data structure - meets requirement
     // - creation of an std::map named "inventory"
@@ -78,7 +74,6 @@ int main()
     const string departments[] {ELECTRONICS_DEPT_NAME, CLOTHING_DEPT_NAME, GROCERIES_DEPT_NAME}; // for departments
 
     // input file reading code block - meets requirement
-    // - will check for & report any errors when opening the input file. Program will not proceed unless input file is successfully opened
     // - for each line in the input file, extract the key (season) and the product name
     // - insert the product into its corresponding list (electronics, clothing, groceries) in the array for their season
     // in my project/design proposal, I originally stated that I would have the season, department, & product name on 1 line in the input file, separated by commas
@@ -86,20 +81,18 @@ int main()
     // each season, department, and product name will now have its own line in the input file, in that order. No spaces allowed, department name is case sensitive
     // the input file I am using is named "inventoryFinal.txt" and it contains more than 100 lines of input - meets requirement
     // note: the input file should be structured exactly the way I have it in order for the program to operate successfully. Please open "inventoryFinal.txt" to see exact structure
-    // I am copying my input file reading code block from the driver program (testing.cpp) that I created
-    // to see my progression while coding this block, please see my commits that relate to my driver program within the "alpha" branch
 
     ifstream inputFile("inventoryFinal.txt"); // creating an ifstream object to open the input file
     if (!inputFile) // if the input file does not open
     {
-        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location and try running the program again." << endl;
-        cout << "Program will now exit..." << endl;
+        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location and try running the program again." << endl; // report the error
+        cout << "Program will now exit..." << endl; // exit the program since we do not have data to work with
         return 1; // exit and return an error state
     }
 
-    while (getline(inputFile, season)) // as long as the season is being read from the input file
+    while (getline(inputFile, season)) // as long as the season is being read from the input file (season is the key/very first line of the input file)
     {
-        // break out of the loop if the department or product cannot be read
+        // break out of the loop if the department or product cannot be read - the order of the input file is season, department, and then product
         if (!getline(inputFile, department)) break;
         if (!getline(inputFile, product)) break;
 
