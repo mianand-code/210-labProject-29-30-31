@@ -28,6 +28,12 @@ const int ELECTRONICS_DEPT_INDEX = 0; // accessed by [0] in array of std::lists
 const int CLOTHING_DEPT_INDEX = 1; // accessed by [1] in array of std::lists
 const int GROCERIES_DEPT_INDEX = 2; // accessed by [2] in array of std::lists
 
+// to perform randomization tasks in main()
+// #  of events, seasons, departments + indexes
+const int EVENT_NUM = 3;
+const int SEASON_NUM = 4;
+const int DEPARTMENT_NAME_INDEX_NUM = 3;
+
 // for department name
 const string ELECTRONICS_DEPT_NAME = "electronics"; 
 const string CLOTHING_DEPT_NAME = "clothing"; 
@@ -290,15 +296,15 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
         }
 }
 
-// DESCRIPTION: this function is a helper function for the inventorySimulation() function
-// - creating this as a function to ensure that t isn't too complex
+// DESCRIPTION: this function assists with purchase and theft events
+// - when a purchase or theft event is triggered for a product in a department that is not empty, this function will find the product to be stolen/purchased and will remove it from the list once
+// - this function is a helper function for the inventorySimulation() function
+// - creating this function to ensure that inventorySimulation() isn't too complex
 // ARGUMENTS: list<string>& department, which is an std::list (representing a department) that holds string values that represent product names
 // - passing by reference to indicate that the std::list will be modified
 // RETURNS: true or false, since it is a bool function
 // - true means a product was found and erased from the department
 // - false means a product was not found and could not be erased from the department
-// this function will help ensure that a theft or purchase only occurs within a department that has product, and is not out of stock
-// if the department + product is in stock, a theft or purchase can happen at any time, and if it happens, the product will be removed from the department's inventory once
 bool checkUpdateInventoryStock(list<string>& department, string product)
 {
     // create an iterator to start at the beginning of the std::list and continue until the end

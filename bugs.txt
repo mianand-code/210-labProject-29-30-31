@@ -39,3 +39,6 @@ Please see line #49.
 #8 - I realized I could update the logic in my bool checkUpdateInventoryStock() function to make it less prone to errors.
 I implemented this fix by using the find() member function to search for a certain product in a department (std::list). 
 Please see my updated bool checkUpdateInventoryStock() function logic.
+
+#9 - I realized that instead of using hardcoded values when performing randomization tasks in main(), I need to create global const variables to make the code cleaner/easier to read + make it easier to change parameters in the future, if needed.
+I fixed this by adding global const variables for # of events, seasons, and departments + indexes and updating the code in main().
