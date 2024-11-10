@@ -45,7 +45,8 @@ const string SEASON_3 = "Fall";
 const string SEASON_4 = "Winter";
 
 // the product to be delivered as replenishment when a delivery event is triggered for a department that is completely out of stock
-const string REPLENISHMENT_PRODUCT = "replenishment";
+// this product may also be delivered to "top off" an existing product's stock, even if the department is not completely out of stock
+const string STOCK_REFILL_PRODUCT = "StockRefill";
 
 // function prototypes
 // creating 3 functions - meets requirement
@@ -147,7 +148,7 @@ int main()
             {
                 if (randomEvent == DELIVERY_EVENT) // if a delivery event is triggered when the department/list is completely empty
                 {
-                    inventorySimulation(inventory, randomSeason, DELIVERY_EVENT, REPLENISHMENT_PRODUCT, randomDepartmentIndex); // inventorySimulation() function call, will deliver the replenishment product to the department
+                    inventorySimulation(inventory, randomSeason, DELIVERY_EVENT, STOCK_REFILL_PRODUCT, randomDepartmentIndex); // inventorySimulation() function call, will deliver the replenishment product to the department
                     cout << "    Replenishment is being delivered since department has no stock..." << endl;
                 }
                 else if (randomEvent == PURCHASE_EVENT || randomEvent == THEFT_EVENT) // if a purchase or theft event is triggered when the department/list is completely empty
@@ -299,14 +300,13 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
 // if the department + product is in stock, a theft or purchase can happen at any time, and if it happens, the product will be removed from the department's inventory once
 bool checkUpdateInventoryStock(list<string>& department, string product)
 {
-    // create a for loop that uses an iterator to start at the beginning of the std::list and continue until the end
-    for (auto it = department.begin(); it != department.end(); it++) 
-    {
+    // create an iterator to start at the beginning of the std::list and continue until the end
+    // using the .find member function to search for the product within the std::list
+    auto it = find(department.begin(), department.end(), product); 
         if (*it == product) // using * with the iterator to de-reference it, to access product name
         {
             department.erase(it); // erase the product at the position of the iterator if the product exists
             return true;  // true means a product was removed from the department
         }
-    }
     return false;  // false means no product could be removed from the department since it had no stock and product was not found
 }
