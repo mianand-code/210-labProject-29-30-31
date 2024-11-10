@@ -126,7 +126,7 @@ int main()
         cout << endl << "*** Day #" << days << " ***" << endl;
 
         // within the for loop, we need to randomly select a # of inventory-related events to occur
-        int randomEventNum = rand() % 3 + 1; // choosing a random # of events between 1-3
+        int randomEventNum = rand() % 10 + 1; // choosing a random # of events between 1-10
 
         // based on this # of random events (create another for loop), we need to randomly select a season, department, product, and type of inventory-related event to occur
         for (int i = 0; i < randomEventNum; i++)
@@ -284,16 +284,6 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
                     cout << "purchase..." << endl;
                 else
                     cout << "theft..." << endl;
-            }
-            else
-            {
-                // if department has no stock
-                // displays message based on event type
-                cout <<  "    No stock to ";
-                if (event == PURCHASE_EVENT)
-                    cout << "purchase." << endl;
-                else
-                    cout << "steal." << endl;
             }
         }
 }
