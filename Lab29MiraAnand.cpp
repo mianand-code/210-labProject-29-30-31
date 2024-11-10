@@ -45,6 +45,7 @@ const string SEASON_3 = "Fall";
 const string SEASON_4 = "Winter";
 
 // function prototypes
+// creating 3 functions - meets requirement
 // 1. to output the contents of the inventory - initially (after input file reading) and then after each time period occurs
 void displayInventory(const map<string, array<list<string>, 3>> inventory);
 // 2. to perform the actual inventory simulation (when inventory-related events occur)
@@ -74,11 +75,9 @@ int main()
     const string departments[] {ELECTRONICS_DEPT_NAME, CLOTHING_DEPT_NAME, GROCERIES_DEPT_NAME}; // for departments
 
     // input file reading code block - meets requirement
-    // - for each line in the input file, extract the key (season) and the product name
-    // - insert the product into its corresponding list (electronics, clothing, groceries) in the array for their season
     // in my project/design proposal, I originally stated that I would have the season, department, & product name on 1 line in the input file, separated by commas
     // I am deciding to change this format, just to make reading from the input file easier
-    // each season, department, and product name will now have its own line in the input file, in that order. No spaces allowed, department name is case sensitive
+    // each season, department, and product name will now have its own line in the input file. No spaces allowed, department name is case sensitive
     // the input file I am using is named "inventoryFinal.txt" and it contains more than 100 lines of input - meets requirement
     // note: the input file should be structured exactly the way I have it in order for the program to operate successfully. Please open "inventoryFinal.txt" to see exact structure
 
@@ -90,12 +89,13 @@ int main()
         return 1; // exit and return an error state
     }
 
-    while (getline(inputFile, season)) // as long as the season is being read from the input file (season is the key/very first line of the input file)
+    while (getline(inputFile, season)) // as long as the season is being read/extracted from the input file (season is the key/very first line of the input file)
     {
-        // break out of the loop if the department or product cannot be read - the order of the input file is season, department, and then product
-        if (!getline(inputFile, department)) break;
-        if (!getline(inputFile, product)) break;
+        // the input file reads/extracts according to the order of season, department, and then product
+        if (!getline(inputFile, department)) break; // break out of the loop if the department cannot be read/extracted
+        if (!getline(inputFile, product)) break; // break out of the loop if the product cannot be read/extracted
 
+        // insert the product into its corresponding list (electronics, clothing, groceries) in the array for their season
         if (department == ELECTRONICS_DEPT_NAME) // if the department name is electronics
         {
             inventory[season][ELECTRONICS_DEPT_INDEX].push_back(product); // add the product to the end of the list, according to its season and associated index
@@ -118,8 +118,7 @@ int main()
     displayInventory(inventory); // displayInventory() function call, to display the current inventory
 
     // create a for loop to perform the inventory simulation over 25 time periods (which represent days) - meets requirement
-    // for my Alpha Release, I will start off with 5 time periods (instead of 25) just to approximate functionality - to make sure time periods run and randomization works
-    for (int days = 1; days <= 5; days++)
+    for (int days = 1; days <= 25; days++)
     {
         cout << endl << "*** Day #" << days << " ***" << endl;
 
@@ -161,10 +160,11 @@ int main()
     return 0;
 }
 
-// make sure to include function header comments here
 // void displayInventory(const map<string, array<list<string>, 3>> inventory) function header
-// DESCRIPTION: create a function that displays/outputs the contents of our foundational data structure (current inventory) - meets requirement
-// ARGUMENTS: the parameter for the function should be our foundational data structure - const map<string, array<list<string>, 3>> inventory
+// DESCRIPTION: this function outputs/displays the contents of the foundational data structure created in main(). Current inventory will be neatly displayed
+// ARGUMENTS: const map<string, array<list<string>, 3>> inventory, an std::map in which the key is a string variable that represents a season
+// - and the value is an std::array of 3 std::lists, that each hold string values
+// - using const to signify that the data structure should not be modified
 // RETURNS: nothing, void function
 void displayInventory(const map<string, array<list<string>, 3>> inventory)
 {
