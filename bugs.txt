@@ -13,14 +13,14 @@ To fix this, I created a global const string variable that represents the produc
 Please see line #29.
 
 #2 - Now that I have fixed the issue where we needed to choose/have a product that will be delivered as replenishment when a department is completely out of stock, I needed to update my coding logic to accommodate this. 
-I fixed my coding logic by calling my inventorySimulation() function (within an “if” statement) if a delivery event is triggered for a department that is completely out of stock, and I ensured that the function parameter for the “product” is my global const string variable that I created in my previous entry (entry #1).
+I fixed my coding logic by calling my inventorySimulation() function (within an “if” statement) if a delivery event is triggered for a department that is completely out of stock. I ensured that the function parameter for the “product” is my global const string variable that I created in my previous entry (entry #1).
 Please see line #'s 148-152.
 
 #3 - I realized that I need to perform a check in my program that checks if departments (std::lists) are empty or not. This was not implemented at all in my coding logic. 
 I fixed this by implementing the check in my main() function (as an if statement) and it was also implemented as part of my fix for entry #2. 
 Please see line #146.
 
-#4 - I needed to update the code block that deals with selecting a random product from a department that does have existing stock. 
+#4 - I needed to update the code block that deals with selection of a random product from a department that does have existing stock. 
 I fixed this by putting the existing code in an “else” statement that goes along with my “if” statement from entry #3.
 Please see line #'s 154-162.
 
@@ -33,7 +33,7 @@ I fixed this by eliminating this piece of code in my function.
 Please see my updated inventorySimulation() function logic.
 
 #7 - I realized that having the name of my global const string variable as “REPLENISHMENT_PRODUCT” and its string value as “replenishment” may be a little misleading. When this product is delivered to an out of stock department, it becomes a part of the std::list. This means it can now be chosen as one of the random products to be delivered once again, even if the department has products in stock. 
-To fix this, I am renaming the variable to “STOCK_REFILL_PRODUCT” and the value it holds to “StockRefill”. This name provides more clarity and can be applied to a situation where a department is completely out of stock and also to a situation where a product’s stock is being “topped off”, to ensure the product does not run out.
+To fix this, I am renaming the variable to “STOCK_REFILL_PRODUCT” and the value it holds to “StockRefill”. This name provides more clarity and can be applied to a situation where a department is completely out of stock and also to a situation where a product’s stock is being “topped off”, to ensure that the product does not run out.
 Please see line #49.
 
 #8 - I realized I could update the logic in my bool checkUpdateInventoryStock() function to make it less prone to errors.
@@ -44,5 +44,6 @@ Please see my updated bool checkUpdateInventoryStock() function logic.
 I fixed this by adding global const variables for # of event types, seasons, and departments + indexes and updating the code in main().
 Please see line #'s 33-35 & 142-147.
 
-#10 - I realized I could update the displayInventory() function to make it my logic more uniform and easier to understand.
-I implemented this by using the “auto” keyword + range-based for loops to iterate through and display inventory data, rather than using a mix of range-based for loops and normal for loops. 
+#10 - I realized I could update the displayInventory() function to make my logic more uniform and easier to understand.
+I implemented this by using the “auto” keyword and range-based for loops to iterate through and display inventory data, rather than using a mix of range-based for loops and normal for loops. 
+Please see my updated displayInventory() function logic.
