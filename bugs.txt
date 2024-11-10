@@ -35,3 +35,7 @@ Please see my updated inventorySimulation() function logic.
 #7 - I realized that having the name of my global const string variable as “REPLENISHMENT_PRODUCT” and its string value as “replenishment” may be a little misleading. When this product is delivered to an out of stock department, it becomes a part of the std::list. This means it can now be chosen as one of the random products to be delivered once again, even if the department has products in stock. 
 To fix this, I am renaming the variable to “STOCK_REFILL_PRODUCT” and the value it holds to “StockRefill”. This name provides more clarity and can be applied to a situation where a department is completely out of stock and also to a situation where a product’s stock is being “topped off”, to ensure the product does not run out.
 Please see line #49.
+
+#8 - I realized I could update the logic in my bool checkUpdateInventoryStock() function to make it less prone to errors.
+I implemented this fix by using the find() member function to search for a certain product in a department (std::list). 
+Please see my updated bool checkUpdateInventoryStock() function logic.

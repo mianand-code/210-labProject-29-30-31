@@ -233,8 +233,9 @@ void displayInventory(const map<string, array<list<string>, 3>> inventory)
 // - the user is first notified that an event is triggered
 // - if the event is a delivery, a product is simply added to the inventory
 // - a helper function is used to assist with theft and purchase events. This helper function assists with removing the product from the inventory once if it is stolen or purchased.
-// ARGUMENTS: 1. const map<string, array<list<string>, 3>> inventory, an std::map in which the key is a string variable that represents a certain season
+// ARGUMENTS: 1. map<string, array<list<string>, 3>>& inventory, an std::map in which the key is a string variable that represents a certain season
 // - and the value is an std::array of 3 std::lists, that each hold string values - represents different departments
+// - passing by reference to indicate that the data structure will be modified
 // - 2. string season, which represents a certain season
 // - 3. string event, which represents the type of inventory-related event to occur
 // - 4. string product, which represents the name of a certain product
@@ -289,13 +290,13 @@ void inventorySimulation(map<string, array<list<string>, 3>>& inventory, string 
         }
 }
 
-// DESCRIPTION: create a helper function that works with the inventory simulation function - meets requirement
-// ARGUMENTS:
-    // the parameters for the function should include:
-    // 1. the std::list that holds the products of a certain department
-    // 2. the product name (in order to be removed from inventory)
+// DESCRIPTION: this function is a helper function for the inventorySimulation() function
+// - creating this as a function to ensure that t isn't too complex
+// ARGUMENTS: list<string>& department, which is an std::list (representing a department) that holds string values that represent product names
+// - passing by reference to indicate that the std::list will be modified
 // RETURNS: true or false, since it is a bool function
-// creating this as a function to ensure that the inventory simulation function isn't too complex
+// - true means a product was found and erased from the department
+// - false means a product was not found and could not be erased from the department
 // this function will help ensure that a theft or purchase only occurs within a department that has product, and is not out of stock
 // if the department + product is in stock, a theft or purchase can happen at any time, and if it happens, the product will be removed from the department's inventory once
 bool checkUpdateInventoryStock(list<string>& department, string product)
@@ -303,10 +304,11 @@ bool checkUpdateInventoryStock(list<string>& department, string product)
     // create an iterator to start at the beginning of the std::list and continue until the end
     // using the .find member function to search for the product within the std::list
     auto it = find(department.begin(), department.end(), product); 
-        if (*it == product) // using * with the iterator to de-reference it, to access product name
+        if (it != department.end()) // as long as the iterator has not gone out of bounds, this means we found the product
         {
-            department.erase(it); // erase the product at the position of the iterator if the product exists
-            return true;  // true means a product was removed from the department
+            department.erase(it); // erase the product at the position of the iterator
+            return true;  // return true, meaning a product was removed from the department
         }
-    return false;  // false means no product could be removed from the department since it had no stock and product was not found
+        else
+            return false;  // return false, meaning no product could be removed from the department since the product was not found
 }
