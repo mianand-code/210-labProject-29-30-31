@@ -23,3 +23,7 @@ Please see line #146.
 #4 - I needed to update the code block that deals with selecting a random product from a department that does have existing stock. 
 I fixed this by putting the existing code in an “else” statement that goes along with my “if” statement from entry #3.
 Please see line #'s 154-162.
+
+#5 - When I updated/corrected my coding logic to ensure that product was still being delivered to an out of stock department, I realized that users were not being notified about “attempted” events. I wanted users to be notified that a theft or purchase event was still getting attempted, even if a department is out of stock/empty. 
+I fixed this by adding “else if” logic to my main() function that applies to purchase and theft events. With this logic, users will get notified about “attempted” events that occurred in out of stock departments. This mimics a situation where an individual wants to purchase/steal something, but realizes it is not in stock.
+Please see line #'s 153-159.

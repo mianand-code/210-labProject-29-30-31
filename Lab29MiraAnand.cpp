@@ -150,6 +150,13 @@ int main()
                     inventorySimulation(inventory, randomSeason, DELIVERY_EVENT, REPLENISHMENT_PRODUCT, randomDepartmentIndex); // inventorySimulation() function call, will deliver the replenishment product to the department
                     cout << "    Replenishment is being delivered since department has no stock..." << endl;
                 }
+                else if (randomEvent == PURCHASE_EVENT || randomEvent == THEFT_EVENT) // if a purchase or theft event is triggered when the department/list is completely empty
+                {
+                    // still notify the user that the event was attempted, even though the inventory will not be changed
+                    cout << endl << "Attempted " << randomEvent << " event: ";
+                    cout << "Season: " << randomSeason << ", ";
+                    cout << "Department: " << randomDepartment << endl;
+                }
             }
             else
             {
@@ -221,7 +228,10 @@ void displayInventory(const map<string, array<list<string>, 3>> inventory)
     }
 }
 
-// DESCRIPTION: create a function that performs the actual inventory simulation - meets requirement
+// DESCRIPTION: this function simulates a delivery, theft, or purchase event for a given season, department, and product
+// - the user is first notified that an event is triggered
+// - if the event is a delivery, a product is simply added to the inventory
+// - a helper function is used to assist with theft and purchase events. This helper function assists with removing the product from the inventory once if it is stolen or purchased.
 // ARGUMENTS: 1. const map<string, array<list<string>, 3>> inventory, an std::map in which the key is a string variable that represents a certain season
 // - and the value is an std::array of 3 std::lists, that each hold string values - represents different departments
 // - 2. string season, which represents a certain season
