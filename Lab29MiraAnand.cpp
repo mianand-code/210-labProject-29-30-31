@@ -29,8 +29,8 @@ const int CLOTHING_DEPT_INDEX = 1; // accessed by [1] in array of std::lists
 const int GROCERIES_DEPT_INDEX = 2; // accessed by [2] in array of std::lists
 
 // to perform randomization tasks in main()
-// #  of events, seasons, departments + indexes
-const int EVENT_NUM = 3;
+// #  of event types, seasons, departments + indexes
+const int EVENT_TYPE_NUM = 3;
 const int SEASON_NUM = 4;
 const int DEPARTMENT_NAME_INDEX_NUM = 3;
 
@@ -139,12 +139,12 @@ int main()
         for (int i = 0; i < randomEventNum; i++)
         {
             // random season
-            string randomSeason = seasons[rand() % 4]; // choose from the seasons array we created
+            string randomSeason = seasons[rand() % SEASON_NUM]; // choose from the seasons array we created
             // random department - choose a random department index and associate it with a name
-            int randomDepartmentIndex = rand() % 3; // 0-2 index
+            int randomDepartmentIndex = rand() % DEPARTMENT_NAME_INDEX_NUM; // 0-2 index
             string randomDepartment = departments[randomDepartmentIndex]; // access department name
             // random event
-            string randomEvent = events[rand() % 3]; // choose from the events array we created
+            string randomEvent = events[rand() % EVENT_TYPE_NUM]; // choose from the events array we created
             
             // choose a random product from the department that was randomly chosen
             list<string> chosenDepartment = inventory[randomSeason][randomDepartmentIndex]; // access the associated std::list
@@ -200,16 +200,17 @@ void displayInventory(const map<string, array<list<string>, 3>> inventory)
     {
         cout << "Season: " << season.first << endl; // access the season (key) using .first
 
-        // create a for loop within this range-based for loop to output each department name (according to its index)
-        for (int d = 0; d < 3; d++)
+        // create another range-based for loop to output each department name (according to its index)
+        for (auto departments : season.second) // season.second accesses the value in the std::map
         {
             string name; // to hold the name of a department
-            // associate each department name with an index
-            if (d == ELECTRONICS_DEPT_INDEX) 
+
+            // associate each department name with its index
+            if (departments == season.second[ELECTRONICS_DEPT_INDEX]) 
             {
                 name = ELECTRONICS_DEPT_NAME;
             }
-            else if (d == CLOTHING_DEPT_INDEX)
+            else if (departments == season.second[CLOTHING_DEPT_INDEX])
             {
                 name = CLOTHING_DEPT_NAME;
             }
@@ -220,12 +221,11 @@ void displayInventory(const map<string, array<list<string>, 3>> inventory)
 
             cout <<  "    Department - " << name << ": "; // output the name of the department
 
-        // output the products in each department
-        // ensure there is a message that prints if a department has no products (out of stock)
-            if (season.second[d].empty()) // .second accesses the value of the map, if a certain department is empty
+        // output the products in each department (list)
+            if (departments.empty()) // if a certain department is empty
                 cout << "* department out of stock *"; // out of stock is displayed
             else
-                for (string product : season.second[d]) // display the products in the department
+                for (auto product : departments) // display the products in the department
                 {
                     cout << product << " ";
                 }

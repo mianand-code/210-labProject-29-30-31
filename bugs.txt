@@ -41,4 +41,8 @@ I implemented this fix by using the find() member function to search for a certa
 Please see my updated bool checkUpdateInventoryStock() function logic.
 
 #9 - I realized that instead of using hardcoded values when performing randomization tasks in main(), I need to create global const variables to make the code cleaner/easier to read + make it easier to change parameters in the future, if needed.
-I fixed this by adding global const variables for # of events, seasons, and departments + indexes and updating the code in main().
+I fixed this by adding global const variables for # of event types, seasons, and departments + indexes and updating the code in main().
+Please see line #'s 33-35 & 142-147.
+
+#10 - I realized I could update the displayInventory() function to make it my logic more uniform and easier to understand.
+I implemented this by using the “auto” keyword + range-based for loops to iterate through and display inventory data, rather than using a mix of range-based for loops and normal for loops. 
