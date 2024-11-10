@@ -10,5 +10,12 @@ The following are bugs I encountered while coding and testing:
 
 #1 - This is a significant bug I encountered. During my Alpha release, I was having an issue where out of stock departments were not getting replenished, because my coding logic was incorrect. Out of stock departments were not receiving replenishment deliveries because the original std::list (department) was empty, so there was no list of products to be chosen from to perform the actual replenishment. 
 To fix this, I created a global const string variable that represents the product that will be delivered when a department is completely out of stock. This product will be the one that is “chosen” when a delivery event is triggered for a department that is completely out of stock.
+Please see line #29.
 
-#2 - Now that I have fixed the issue where we needed to choose/have a product that will be delivered as replenishment when a department is completely
+#2 - Now that I have fixed the issue where we needed to choose/have a product that will be delivered as replenishment when a department is completely out of stock, I needed to update my coding logic to accommodate this. 
+I fixed my coding logic by calling my inventorySimulation() function (within an “if” statement) if a delivery event is triggered for a department that is completely out of stock, and I ensured that the function parameter for the “product” is my global const string variable that I created in my previous entry (entry #1).
+Please see line #'s 148-152.
+
+#3 - I realized that I need to perform a check in my program that checks if departments (std::lists) are empty or not. This was not implemented at all in my coding logic. 
+I fixed this by implementing the check in my main() function (as an if statement) and it was also implemented as part of my fix for entry #2. 
+Please see line #146.

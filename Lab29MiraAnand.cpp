@@ -142,6 +142,16 @@ int main()
             // choose a random product from the department that was randomly chosen
             list<string> chosenDepartment = inventory[randomSeason][randomDepartmentIndex]; // access the associated std::list
 
+            // check if the randomly chosen department is completely empty (out of stock)
+            if (chosenDepartment.empty())
+            {
+                if (randomEvent == DELIVERY_EVENT) // if a delivery event is triggered when the department/list is completely empty
+                {
+                    inventorySimulation(inventory, randomSeason, DELIVERY_EVENT, REPLENISHMENT_PRODUCT, randomDepartmentIndex); // inventorySimulation() function call, will 
+                    cout << "    Replenishment is being delivered since department has no stock..." << endl;
+                }
+            }
+
             auto it = chosenDepartment.begin(); // creation of an iterator to traverse the std::list
             advance(it, rand() % chosenDepartment.size()); // advance the iterator to a random position (product) within the list. .size() used to ensure iterator does not go out of bounds
             string randomProduct = *it; // de-reference the iterator (*) to access the product name at the iterator
