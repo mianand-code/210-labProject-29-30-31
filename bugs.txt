@@ -3,3 +3,12 @@
 // IDE used: Visual Studio Code for Mac
 
 // All commits for this .txt file can be found in the “beta” branch
+
+The following are bugs I encountered while coding and testing: 
+
+(Since the “Maintenance” phase of the SDLC also requires “updates” and “enhancements”, some of these items listed below are more of updates and enhancements I realized I could make to the coding logic rather than major bugs.)
+
+#1 - This is a significant bug I encountered. During my Alpha release, I was having an issue where out of stock departments were not getting replenished, because my coding logic was incorrect. Out of stock departments were not receiving replenishment deliveries because the original std::list (department) was empty, so there was no list of products to be chosen from to perform the actual replenishment. 
+To fix this, I created a global const string variable that represents the product that will be delivered when a department is completely out of stock. This product will be the one that is “chosen” when a delivery event is triggered for a department that is completely out of stock.
+
+#2 - Now that I have fixed the issue where we needed to choose/have a product that will be delivered as replenishment when a department is completely

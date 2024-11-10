@@ -44,6 +44,9 @@ const string SEASON_2 = "Summer";
 const string SEASON_3 = "Fall";
 const string SEASON_4 = "Winter";
 
+// the product to be delivered as replenishment when a delivery event is triggered for a department that is completely out of stock
+const string REPLENISHMENT_PRODUCT = "replenishment";
+
 // function prototypes
 // creating 3 functions - meets requirement
 // 1. to output the contents of the inventory - initially (after input file reading) and then after each time period occurs
@@ -135,9 +138,6 @@ int main()
             string randomDepartment = departments[randomDepartmentIndex]; // access department name
             // random event
             string randomEvent = events[rand() % 3]; // choose from the events array we created
-
-            // ***** I am having an issue with this part of my code (selecting random product). I will debug it when I start coding my Beta Release, since the Alpha Release does not need to be perfect yet
-            // ***** the issue is that if the list/department is empty, product cannot be re-delivered to out of stock departments since there is no product to choose from
             
             // choose a random product from the department that was randomly chosen
             list<string> chosenDepartment = inventory[randomSeason][randomDepartmentIndex]; // access the associated std::list
@@ -145,8 +145,6 @@ int main()
             auto it = chosenDepartment.begin(); // creation of an iterator to traverse the std::list
             advance(it, rand() % chosenDepartment.size()); // advance the iterator to a random position (product) within the list. .size() used to ensure iterator does not go out of bounds
             string randomProduct = *it; // de-reference the iterator (*) to access the product name at the iterator
-            
-            // ***** issue ends
 
             // call our function that performs the inventory simulation within this second for loop
             inventorySimulation(inventory, randomSeason, randomEvent, randomProduct, randomDepartmentIndex);
@@ -161,9 +159,9 @@ int main()
 }
 
 // void displayInventory(const map<string, array<list<string>, 3>> inventory) function header
-// DESCRIPTION: this function outputs/displays the contents of the foundational data structure created in main(). Current inventory will be neatly displayed
-// ARGUMENTS: const map<string, array<list<string>, 3>> inventory, an std::map in which the key is a string variable that represents a season
-// - and the value is an std::array of 3 std::lists, that each hold string values
+// DESCRIPTION: this function outputs/displays the contents of the foundational data structure created in main(). This data structure holds all data that corresponds to the current inventory state. This data will be neatly displayed.
+// ARGUMENTS: const map<string, array<list<string>, 3>> inventory, an std::map in which the key is a string variable that represents a certain season
+// - and the value is an std::array of 3 std::lists, that each hold string values - represents different departments
 // - using const to signify that the data structure should not be modified
 // RETURNS: nothing, void function
 void displayInventory(const map<string, array<list<string>, 3>> inventory)
