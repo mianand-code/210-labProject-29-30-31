@@ -1,0 +1,49 @@
+// COMSC-210 | Lab 31 | Mira Anand
+// Module 11, Lesson: Software Development Life Cycle, Assignment: Beta Release
+// IDE used: Visual Studio Code for Mac
+
+// All commits for this .txt file can be found in the “beta” branch
+
+The following are bugs I encountered while coding and testing: 
+
+(Since the “Maintenance” phase of the SDLC also requires “updates” and “enhancements”, some of these items listed below are more of updates and enhancements I realized I could make to the coding logic rather than major bugs.)
+
+#1 - This is a significant bug I encountered. During my Alpha release, I was having an issue where out of stock departments were not getting replenished, because my coding logic was incorrect. Out of stock departments were not receiving replenishment deliveries because the original std::list (department) was empty, so there was no list of products to be chosen from to perform the actual replenishment. 
+To fix this, I created a global const string variable that represents the product that will be delivered when a department is completely out of stock. This product will be the one that is “chosen” when a delivery event is triggered for a department that is completely out of stock.
+Please see line #29.
+
+#2 - Now that I have fixed the issue where we needed to choose/have a product that will be delivered as replenishment when a department is completely out of stock, I needed to update my coding logic to accommodate this. 
+I fixed my coding logic by calling my inventorySimulation() function (within an “if” statement) if a delivery event is triggered for a department that is completely out of stock. I ensured that the function parameter for the “product” is my global const string variable that I created in my previous entry (entry #1).
+Please see line #'s 148-152.
+
+#3 - I realized that I need to perform a check in my program that checks if departments (std::lists) are empty or not. This was not implemented at all in my coding logic. 
+I fixed this by implementing the check in my main() function (as an if statement) and it was also implemented as part of my fix for entry #2. 
+Please see line #146.
+
+#4 - I needed to update the code block that deals with selection of a random product from a department that does have existing stock. 
+I fixed this by putting the existing code in an “else” statement that goes along with my “if” statement from entry #3.
+Please see line #'s 154-162.
+
+#5 - When I updated/corrected my coding logic to ensure that product was still being delivered to an out of stock department, I realized that users were not being notified about “attempted” events. I wanted users to be notified that a theft or purchase event was still getting attempted, even if a department is out of stock/empty. 
+I fixed this by adding “else if” logic to my main() function that applies to purchase and theft events. With this logic, users will get notified about “attempted” events that occurred in out of stock departments. This mimics a situation where an individual wants to purchase/steal something, but realizes it is not in stock.
+Please see line #'s 153-159.
+
+#6 - When I updated/corrected my coding logic to ensure that product was still being delivered to an out of stock department, I realized I had some redundant code in my inventorySimulation() function that was not being used/outputted. The part of the code that was redundant was when we would notify the user about a situation in which there was “no product to steal/purchase”. I do not need to handle this anymore in this function, since I handle out of stock department situations in my main() function now. 
+I fixed this by eliminating this piece of code in my function.
+Please see my updated inventorySimulation() function logic.
+
+#7 - I realized that having the name of my global const string variable as “REPLENISHMENT_PRODUCT” and its string value as “replenishment” may be a little misleading. When this product is delivered to an out of stock department, it becomes a part of the std::list. This means it can now be chosen as one of the random products to be delivered once again, even if the department has products in stock. 
+To fix this, I am renaming the variable to “STOCK_REFILL_PRODUCT” and the value it holds to “StockRefill”. This name provides more clarity and can be applied to a situation where a department is completely out of stock and also to a situation where a product’s stock is being “topped off”, to ensure that the product does not run out.
+Please see line #49.
+
+#8 - I realized I could update the logic in my bool checkUpdateInventoryStock() function to make it less prone to errors.
+I implemented this fix by using the find() member function to search for a certain product in a department (std::list). 
+Please see my updated bool checkUpdateInventoryStock() function logic.
+
+#9 - I realized that instead of using hardcoded values when performing randomization tasks in main(), I need to create global const variables to make the code cleaner/easier to read + make it easier to change parameters in the future, if needed.
+I fixed this by adding global const variables for # of event types, seasons, and departments + indexes and updating the code in main().
+Please see line #'s 33-35 & 142-147.
+
+#10 - I realized I could update the displayInventory() function to make my logic more uniform and easier to understand.
+I implemented this by using the “auto” keyword and range-based for loops to iterate through and display inventory data, rather than using a mix of range-based for loops and normal for loops. 
+Please see my updated displayInventory() function logic.
